@@ -142,7 +142,7 @@ export default function LandingMusicSection({ className, style }: LandingMusicSe
               transition={{ duration: 0.5 }} 
             >
               <Image 
-                src="/cracked.png" 
+                src="https://a8aswb0equnjn0q3.public.blob.vercel-storage.com/cracked.png" 
                 alt="Cracked glass overlay" 
                 fill 
                 priority 

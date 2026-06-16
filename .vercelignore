@@ -1,0 +1,29 @@
+# Explicitly ignore heavy assets for Vercel CLI deployments
+private_assets/
+node_modules/
+.next/
+.git/
+.vercel/
+
+# ignore heavy individual audio files in public/audio
+public/audio/*.wav
+public/audio/*.m4a
+public/audio/*.mp3
+public/audio/Abundance Final 2.wav
+public/audio/Abundance.m4a
+public/audio/Fern Drip.m4a
+public/audio/Fern Drip.wav
+public/audio/PSA.m4a
+public/audio/PSA.wav
+public/audio/Right For Me.wav
+public/audio/Right For Me.m4a
+public/audio/Intentions .wav
+public/audio/Intentions.m4a
+public/audio/Wandering_Star_Instrumental.wav
+public/audio/Rear Views new.mp3
+
+# ignore huge individual images in public/
+public/cracked.png
+public/umbrella.png
+public/DIGart.png
+public/audio/Fern Drip Album Art.png

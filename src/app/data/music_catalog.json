@@ -8,7 +8,7 @@
       "price": 15.00,
       "priceCents": 1500,
       "allowDonation": true,
-      "artwork": "/audio/Fern Drip Album Art.png",
+      "artwork": "https://a8aswb0equnjn0q3.public.blob.vercel-storage.com/Fern%20Drip%20Album%20Art.png",
       "tracks": [
         "track-001",
         "track-002",
@@ -32,12 +32,12 @@
       "price": 1.00,
       "priceCents": 100,
       "allowDonation": true,
-      "artwork": "/audio/Fern Drip Album Art.png",
-      "previewUrl": "/audio/Fern Drip.m4a",
+      "artwork": "https://a8aswb0equnjn0q3.public.blob.vercel-storage.com/Fern%20Drip%20Album%20Art.png",
+      "previewUrl": "https://a8aswb0equnjn0q3.public.blob.vercel-storage.com/Fern%20Drip.m4a",
       "downloadUrl": "/downloads/fern-drip-high-res.m4a",
       "files": {
-        "mp3": "/private_assets/Fern Drip.m4a",
-        "wav": "/private_assets/Fern Drip.wav"
+        "mp3": "https://a8aswb0equnjn0q3.public.blob.vercel-storage.com/Fern%20Drip.m4a",
+        "wav": "https://a8aswb0equnjn0q3.public.blob.vercel-storage.com/Fern%20Drip.wav"
       },
       "albumId": "album_001",
       "duration": "3:33",
@@ -51,11 +51,11 @@
       "priceCents": 100,
       "allowDonation": true,
       "artwork": "/audio/Abundance.png",
-      "previewUrl": "/audio/Abundance.m4a",
+      "previewUrl": "https://a8aswb0equnjn0q3.public.blob.vercel-storage.com/Abundance%20Final%202.m4a",
       "downloadUrl": "/downloads/abundance-high-res.m4a",
       "files": {
-        "mp3": "/private_assets/Abundance.m4a",
-        "wav": "/private_assets/Abundance.wav"
+        "mp3": "https://a8aswb0equnjn0q3.public.blob.vercel-storage.com/Abundance%20Final%202.m4a",
+        "wav": "https://a8aswb0equnjn0q3.public.blob.vercel-storage.com/Abundance%20Final%202.wav"
       },
       "albumId": "album_001",
       "duration": "3:42",
@@ -69,11 +69,11 @@
       "priceCents": 100,
       "allowDonation": true,
       "artwork": "/audio/Right For Me  2.png",
-      "previewUrl": "/audio/Right For Me.m4a",
+      "previewUrl": "https://a8aswb0equnjn0q3.public.blob.vercel-storage.com/Right%20For%20Me.m4a",
       "downloadUrl": "/downloads/right-for-me-high-res.m4a",
       "files": {
-        "mp3": "/private_assets/Right For Me.m4a",
-        "wav": "/private_assets/Right For Me.wav"
+        "mp3": "https://a8aswb0equnjn0q3.public.blob.vercel-storage.com/Right%20For%20Me.m4a",
+        "wav": "https://a8aswb0equnjn0q3.public.blob.vercel-storage.com/Right%20For%20Me.wav"
       },
       "albumId": "album_001",
       "duration": "4:17",
@@ -87,11 +87,11 @@
       "priceCents": 100,
       "allowDonation": true,
       "artwork": "/audio/intentionsalbumart.png",
-      "previewUrl": "/audio/Intentions.m4a",
+      "previewUrl": "https://a8aswb0equnjn0q3.public.blob.vercel-storage.com/Intentions.m4a",
       "downloadUrl": "/downloads/intentions-high-res.m4a",
       "files": {
-        "mp3": "/private_assets/Intentions.m4a",
-        "wav": "/private_assets/Intentions .wav"
+        "mp3": "https://a8aswb0equnjn0q3.public.blob.vercel-storage.com/Intentions.m4a",
+        "wav": "https://a8aswb0equnjn0q3.public.blob.vercel-storage.com/Intentions%20.wav"
       },
       "albumId": "album_001",
       "duration": "3:13",
@@ -105,11 +105,11 @@
       "priceCents": 100,
       "allowDonation": true,
       "artwork": "/audio/PSA.png",
-      "previewUrl": "/audio/PSA.m4a",
+      "previewUrl": "https://a8aswb0equnjn0q3.public.blob.vercel-storage.com/PSA.m4a",
       "downloadUrl": "/downloads/psa-high-res.m4a",
       "files": {
-        "mp3": "/private_assets/PSA.m4a",
-        "wav": "/private_assets/PSA.wav"
+        "mp3": "https://a8aswb0equnjn0q3.public.blob.vercel-storage.com/PSA.m4a",
+        "wav": "https://a8aswb0equnjn0q3.public.blob.vercel-storage.com/PSA.wav"
       },
       "albumId": "album_001",
       "duration": "3:01",

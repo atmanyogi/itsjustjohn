@@ -39,7 +39,7 @@ const BreakableGlass: React.FC<BreakableGlassProps> = ({ children }) => {
             transition={{ duration: 0.5 }} // Control fade duration
           >
             <Image 
-              src="/cracked.png" 
+              src="https://a8aswb0equnjn0q3.public.blob.vercel-storage.com/cracked.png" 
               alt="Cracked glass overlay - click to enter" 
               fill 
               priority // Load this image eagerly as it's part of the initial view
