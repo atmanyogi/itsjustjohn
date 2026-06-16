@@ -72,7 +72,7 @@ export const useAudioStore = create<AudioState>()(
 
       const newHowl = new Howl({
         src: [track.audioSrc],
-        html5: true,
+        html5: false,
         volume: get().volume,
       onplay: () => {
         set({ isPlaying: true, duration: newHowl.duration() });

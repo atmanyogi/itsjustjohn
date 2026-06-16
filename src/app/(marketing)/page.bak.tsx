@@ -58,10 +58,10 @@ export default function MarketingPage() {
     <main className="relative h-full overflow-x-hidden w-full max-w-full">
       <Header />
 
-      {/* First visual in chain: IJJ 3.png */}
+      {/* First visual in chain: IJJ 4.png */}
       <div className="relative w-full">
         <Image
-          src="/audio/IJJ 3.png"
+          src="/audio/IJJ 4.png"
           alt="IJJ Banner"
           width={1920}
           height={1080}

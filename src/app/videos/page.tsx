@@ -12,6 +12,16 @@ export default function VideosPage() {
 
       {/* Main Visual Playground */}
       <div className="relative flex-1 w-full flex flex-col items-center justify-center p-4">
+        {/* Mobile visual engagement overlay */}
+        <div className="absolute top-[120px] left-0 right-0 px-6 text-center z-30 block md:hidden animate-in fade-in duration-700">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-wider leading-snug drop-shadow-[0_4px_16px_rgba(0,0,0,1)] uppercase">
+            keep up with our latest visuals!
+          </h1>
+          <p className="mt-4 text-base sm:text-lg lg:text-xl font-black text-emerald-800 uppercase tracking-[0.25em] drop-shadow-[0_2.5px_10px_rgba(255,255,255,1)]">
+            We hope they INSPIRE
+          </p>
+        </div>
+
         {/* Full backdrop: layers 2.png */}
         <div className="absolute inset-0 z-0">
           <Image

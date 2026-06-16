@@ -56,10 +56,10 @@ export default function MarketingPage() {
     <main className="relative h-full overflow-x-hidden w-full max-w-full">
       <Header />
 
-      {/* First visual in chain: IJJ 3.png */}
+      {/* First visual in chain: IJJ 4.png */}
       <div className="relative w-full">
         <Image
-          src="/audio/IJJ 3.png"
+          src="/audio/IJJ 4.png"
           alt="IJJ Banner"
           width={1920}
           height={1080}
@@ -71,7 +71,7 @@ export default function MarketingPage() {
       </div>
 
       {/* Lid layer with HeroSection over top */}
-      <div className="relative w-full h-full">
+      <div className="relative w-full">
         <Image
           src="/lid.png"
           alt="Lid"
@@ -82,6 +82,43 @@ export default function MarketingPage() {
           priority
           sizes="100vw"
         />
+        {/* Solid overlay at the top of the lid.png container */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[90%] md:w-[85%] pointer-events-none z-10">
+          <Image
+            src="/audio/solid.png"
+            alt="Solid Overlay"
+            width={1920}
+            height={1080}
+            className="block w-full h-auto object-cover transform-gpu will-change-transform"
+            draggable={false}
+            priority
+            sizes="100vw"
+          />
+        </div>
+
+        {/* Mobile Promo Editorial Block - Right Side, halfway down above lid.png */}
+        <div className="absolute top-[75%] right-5 max-w-[50vw] text-right z-20 block md:hidden animate-in fade-in slide-in-from-right duration-1000">
+          <h2 className="text-xl xs:text-2xl font-black text-white uppercase tracking-wider leading-snug drop-shadow-[0_4px_16px_rgba(0,0,0,1)]">
+            Raps Hawaii, but not like Reiplinger
+          </h2>
+          <p className="mt-2 text-base xs:text-lg font-black text-black italic tracking-wide leading-tight drop-shadow-[0_2.5px_10px_rgba(255,255,255,1)]">
+            Dancing in the Hilo Reign
+          </p>
+          <a
+            href="https://www.instagram.com/itsjustjohntho/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4.5 p-0 inline-flex flex-col items-end pointer-events-auto group"
+          >
+            <span className="text-xs font-black tracking-[0.25em] text-white/95 uppercase drop-shadow-[0_2px_6px_rgba(0,0,0,1)] group-hover:text-black transition-colors animate-pulse">
+              Tap in
+            </span>
+            <div className="mt-2 p-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-lg hover:scale-110 active:scale-95 transition-all text-white group-hover:text-black">
+              <FaInstagram className="w-5 h-5" />
+            </div>
+          </a>
+        </div>
+
         {/* Umbrella - Mobile Only, bottom of umbrella meets bottom of lid */}
         <div 
           className="absolute bottom-0 left-1/2 w-[210vw] max-w-[210vw] md:hidden pointer-events-none z-10 animate-float-pulse"

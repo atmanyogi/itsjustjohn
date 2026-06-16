@@ -29,6 +29,16 @@ export default function ShopPage() {
 
       {/* Main Content Area */}
       <div className="relative flex-1 w-full flex flex-col items-center justify-center">
+        {/* Mobile engagement headlines */}
+        <div className="absolute top-[210px] left-0 right-0 px-6 text-center z-30 block md:hidden animate-in fade-in duration-700">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-wider leading-snug drop-shadow-[0_4px_16px_rgba(0,0,0,1)]">
+            Fam, Come explore our limited and original merch drops
+          </h1>
+          <p className="mt-4 text-base sm:text-lg lg:text-xl font-black text-blue-400 uppercase tracking-[0.25em] drop-shadow-[0_2.5px_10px_rgba(0,0,0,1)]">
+            Dope, Hawaii and one of a kind!
+          </p>
+        </div>
+
         {/* Full Moss background layer */}
         <div className="absolute inset-0 z-0">
           <Image

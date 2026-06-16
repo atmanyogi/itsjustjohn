@@ -43,7 +43,17 @@ export default function NavigationMenu() {
       e.preventDefault();
       const element = document.getElementById(id);
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        // Calculate dynamic vertical offset to center the element exactly in the viewport,
+        // absolutely preventing any horizontal 'drifting' or horizontal scrolling.
+        const elementRect = element.getBoundingClientRect();
+        const elementAbsoluteTop = elementRect.top + window.scrollY;
+        const targetScrollY = elementAbsoluteTop - (window.innerHeight / 2) + (elementRect.height / 2);
+        
+        window.scrollTo({
+          top: targetScrollY,
+          behavior: 'smooth'
+        });
+        
         // Optional: Update URL hash without causing a jump
         window.history.pushState({}, '', `/#${id}`);
       }
