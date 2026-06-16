@@ -104,7 +104,8 @@ export default function LandingMusicSection({ className, style }: LandingMusicSe
     }
 
     setShattered(true);
-    playRef.current();
+    // Directly and synchronously play using the store state to unlock HTML5 audio on mobile browsers!
+    useAudioStore.getState().play();
     console.log("Glass cracked!");
   };
 

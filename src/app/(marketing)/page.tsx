@@ -125,7 +125,7 @@ export default function MarketingPage() {
           style={{ transform: 'translateX(calc(-50% + 33.3vw))' }}
         >
           <Image
-            src="/umbrella.png"
+            src="https://a8aswb0equnjn0q3.public.blob.vercel-storage.com/umbrella.png"
             alt="Umbrella Mobile"
             width={1920}
             height={1080}

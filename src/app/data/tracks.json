@@ -7,7 +7,7 @@
     "audioSrc": "https://a8aswb0equnjn0q3.public.blob.vercel-storage.com/Fern%20Drip.m4a",
     "length": "3:33",
     "priceCents": 100,
-    "cover": "/audio/Fern Drip Album Art.png"
+    "cover": "https://a8aswb0equnjn0q3.public.blob.vercel-storage.com/Fern%20Drip%20Album%20Art.png"
   },
   {
     "id": "track-002",

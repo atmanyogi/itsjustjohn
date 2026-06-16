@@ -2,6 +2,7 @@
 import { Howl, Howler } from 'howler';
 import { create } from 'zustand';
 import { subscribeWithSelector } from 'zustand/middleware';
+import tracksData from '../data/tracks.json';
 
 export interface Track {
   id: string;
@@ -72,7 +73,7 @@ export const useAudioStore = create<AudioState>()(
 
       const newHowl = new Howl({
         src: [track.audioSrc],
-        html5: false,
+        html5: true, // true lets HTML5 stream remote files without CORS blocks!
         volume: get().volume,
       onplay: () => {
         set({ isPlaying: true, duration: newHowl.duration() });
@@ -177,8 +178,12 @@ export const useAudioStore = create<AudioState>()(
         if (!saved) return false;
         const parsed = JSON.parse(saved);
         if (parsed && Array.isArray(parsed.queue) && parsed.queue.length > 0) {
-          // Set queue and track without playing automatically (to comply with browser autonomy)
-          set({ queue: parsed.queue });
+          // Update stale cached queue metadata and cover arts from tracks.json cleanly!
+          const updatedQueue = parsed.queue.map((qTrack: any) => {
+            const freshTrack = (tracksData as any[]).find(t => t.id === qTrack.id);
+            return freshTrack ? { ...qTrack, ...freshTrack } : qTrack;
+          });
+          set({ queue: updatedQueue });
           if (parsed.currentTrackId) {
             get().setTrackById(parsed.currentTrackId);
           }
