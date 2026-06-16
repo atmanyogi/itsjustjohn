@@ -60,8 +60,35 @@ export async function GET(req: NextRequest) {
         return NextResponse.json({ error: `Format ${format} not available for this item` }, { status: 404 });
     }
 
-    // 4. Serve File
-    // Clean path to prevent traversal attacks
+    // 4. Serve File (Hybrid: Remote Blob URL vs Local FS asset)
+    if (filePathRelative.startsWith("http://") || filePathRelative.startsWith("https://")) {
+      try {
+        const response = await fetch(filePathRelative);
+        if (!response.ok) {
+          console.error(`Failed to fetch secure remote asset: ${filePathRelative}`);
+          return NextResponse.json({ error: "Failed to download secure asset from storage" }, { status: 502 });
+        }
+
+        const fileBuffer = Buffer.from(await response.arrayBuffer());
+        const filename = filePathRelative.split("/").pop()?.split("?")[0] || `${item.title || "download"}.${format}`;
+
+        // Determine mime type
+        let contentType = response.headers.get("Content-Type") || "application/octet-stream";
+
+        return new NextResponse(fileBuffer, {
+          headers: {
+            "Content-Type": contentType,
+            "Content-Disposition": `attachment; filename="${filename}"`,
+            "Content-Length": fileBuffer.length.toString(),
+          },
+        });
+      } catch (err) {
+        console.error("Error streaming remote blob asset:", err);
+        return NextResponse.json({ error: "Storage streaming error" }, { status: 500 });
+      }
+    }
+
+    // Clean path to prevent traversal attacks for local files
     const safePath = path.normalize(filePathRelative).replace(/^(\.\.(\/|\\|$))+/, '');
     
     // Construct absolute path (assuming private_assets is at project root)
