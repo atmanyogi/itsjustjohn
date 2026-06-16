@@ -1,0 +1,119 @@
+{
+  "albums": [
+    {
+      "id": "album_001",
+      "title": "Complete Collection",
+      "artist": "its.just.john",
+      "description": "Full access to all photographs, studio session recordings, and custom digital items from the project's creation journey.",
+      "price": 15.00,
+      "priceCents": 1500,
+      "allowDonation": true,
+      "artwork": "/audio/Fern Drip Album Art.png",
+      "tracks": [
+        "track-001",
+        "track-002",
+        "track-003",
+        "track-004",
+        "track-005"
+      ],
+      "downloadUrl": "/downloads/complete-collection.zip",
+      "files": {
+        "mp3_zip": "/private_assets/Complete_Collection_M4A.zip",
+        "wav_zip": "/private_assets/Complete_Collection_WAV.zip"
+      },
+      "featured": true
+    }
+  ],
+  "tracks": [
+    {
+      "id": "track-001",
+      "title": "Fern Drip",
+      "artist": "its.just.john Feat. Dj Scotty Doo",
+      "price": 1.00,
+      "priceCents": 100,
+      "allowDonation": true,
+      "artwork": "/audio/Fern Drip Album Art.png",
+      "previewUrl": "/audio/Fern Drip.m4a",
+      "downloadUrl": "/downloads/fern-drip-high-res.m4a",
+      "files": {
+        "mp3": "/private_assets/Fern Drip.m4a",
+        "wav": "/private_assets/Fern Drip.wav"
+      },
+      "albumId": "album_001",
+      "duration": "3:33",
+      "featured": true
+    },
+    {
+      "id": "track-002",
+      "title": "Abundance",
+      "artist": "its.just.john",
+      "price": 1.00,
+      "priceCents": 100,
+      "allowDonation": true,
+      "artwork": "/audio/Abundance.png",
+      "previewUrl": "/audio/Abundance.m4a",
+      "downloadUrl": "/downloads/abundance-high-res.m4a",
+      "files": {
+        "mp3": "/private_assets/Abundance.m4a",
+        "wav": "/private_assets/Abundance.wav"
+      },
+      "albumId": "album_001",
+      "duration": "3:42",
+      "featured": true
+    },
+    {
+      "id": "track-003",
+      "title": "Right For Me",
+      "artist": "its.just.john",
+      "price": 1.00,
+      "priceCents": 100,
+      "allowDonation": true,
+      "artwork": "/audio/Right For Me  2.png",
+      "previewUrl": "/audio/Right For Me.m4a",
+      "downloadUrl": "/downloads/right-for-me-high-res.m4a",
+      "files": {
+        "mp3": "/private_assets/Right For Me.m4a",
+        "wav": "/private_assets/Right For Me.wav"
+      },
+      "albumId": "album_001",
+      "duration": "4:17",
+      "featured": true
+    },
+    {
+      "id": "track-004",
+      "title": "Intentions",
+      "artist": "its.just.john",
+      "price": 1.00,
+      "priceCents": 100,
+      "allowDonation": true,
+      "artwork": "/audio/intentionsalbumart.png",
+      "previewUrl": "/audio/Intentions.m4a",
+      "downloadUrl": "/downloads/intentions-high-res.m4a",
+      "files": {
+        "mp3": "/private_assets/Intentions.m4a",
+        "wav": "/private_assets/Intentions .wav"
+      },
+      "albumId": "album_001",
+      "duration": "3:13",
+      "featured": true
+    },
+    {
+      "id": "track-005",
+      "title": "PSA",
+      "artist": "its.just.john",
+      "price": 1.00,
+      "priceCents": 100,
+      "allowDonation": true,
+      "artwork": "/audio/PSA.png",
+      "previewUrl": "/audio/PSA.m4a",
+      "downloadUrl": "/downloads/psa-high-res.m4a",
+      "files": {
+        "mp3": "/private_assets/PSA.m4a",
+        "wav": "/private_assets/PSA.wav"
+      },
+      "albumId": "album_001",
+      "duration": "3:01",
+      "featured": true
+    }
+  ]
+}

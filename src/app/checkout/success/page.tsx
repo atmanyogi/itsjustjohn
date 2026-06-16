@@ -1,0 +1,260 @@
+"use client";
+
+import React, { useEffect, useState, Suspense } from 'react';
+import { useSearchParams, useRouter } from 'next/navigation';
+import { loadStripe } from '@stripe/stripe-js';
+import Link from 'next/link';
+import Image from 'next/image';
+import Header from '../../components/Header';
+import { useCart } from '../../context/CartContext';
+
+// Load Stripe (Publishable Key)
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || 'pk_test_placeholder');
+
+interface PurchasedItem {
+  id: string;
+  title: string;
+  artist?: string;
+  type: string; // 'track' | 'album' | 'gear'
+  artwork: string;
+  files?: {
+    mp3?: string;
+    wav?: string;
+    mp3_zip?: string;
+    wav_zip?: string;
+  };
+}
+
+function SuccessPageContent() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const { clearCart } = useCart();
+  
+  const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading');
+  const [purchasedItems, setPurchasedItems] = useState<PurchasedItem[]>([]);
+  const [paymentIntentId, setPaymentIntentId] = useState<string>("");
+  const [clientSecret, setClientSecret] = useState<string>("");
+  const [hasPhysicalGoods, setHasPhysicalGoods] = useState(false);
+
+  useEffect(() => {
+    const client_secret = searchParams.get('payment_intent_client_secret');
+    const payment_intent = searchParams.get('payment_intent');
+
+    if (!client_secret || !payment_intent) {
+      setStatus('error');
+      return;
+    }
+
+    setClientSecret(client_secret);
+    setPaymentIntentId(payment_intent);
+
+    stripePromise.then(async (stripe) => {
+      if (!stripe) return;
+
+      const { paymentIntent, error } = await stripe.retrievePaymentIntent(client_secret);
+
+      if (error) {
+        console.error("Stripe verify error:", error);
+        setStatus('error');
+        return;
+      }
+
+      if (paymentIntent && paymentIntent.status === 'succeeded') {
+        setStatus('success');
+        clearCart(); // Clear cart on success
+
+        // Retrieve items from metadata
+        // Cast to any to avoid TS errors with Stripe types that might be incomplete
+        const metadata = (paymentIntent as any).metadata || {};
+        const itemIdsString = metadata['itemIds'];
+        const hasPhysical = metadata['hasPhysicalGoods'] === 'true';
+        setHasPhysicalGoods(hasPhysical);
+
+        if (itemIdsString) {
+          const itemIds = itemIdsString.split(',');
+          // Fetch catalog to get details
+          try {
+            const res = await fetch('/api/music-catalog');
+            const data = await res.json();
+            
+            const items: PurchasedItem[] = [];
+            itemIds.forEach((id: string) => {
+              // Check tracks
+              let item = data.tracks.find((t: any) => t.id === id);
+              // Check albums
+              if (!item) item = data.albums.find((a: any) => a.id === id);
+              // Check gear (if available in API) - Gear might not be in music-catalog.json API usually
+              // If gear is not in API, we might need a separate lookup or just show a generic placeholder.
+              // For now, assuming gear is handled separately or we need to fetch gear catalog.
+              // Given the structure, gear logic was in GearModal.
+              // We'll fallback to a generic object if not found in catalog but ID exists.
+              
+              if (item) {
+                items.push({
+                  id: item.id,
+                  title: item.title,
+                  artist: item.artist,
+                  type: item.tracks ? 'album' : 'track', // heuristic
+                  artwork: item.artwork,
+                  files: item.files
+                });
+              } else {
+                // Try to identify if it's gear
+                // If ID is not in music catalog, it might be gear.
+                // We'll just display a placeholder for physical item if we can't find it.
+                // (In a real app, we'd have a unified product API).
+                if (hasPhysical) {
+                   // Placeholder for gear item
+                   items.push({
+                     id: id,
+                     title: "Physical Item",
+                     type: 'gear',
+                     artwork: '/teejar.png'
+                   });
+                }
+              }
+            });
+            setPurchasedItems(items);
+          } catch (e) {
+            console.error("Failed to load catalog details", e);
+          }
+        }
+      } else {
+        setStatus('error');
+      }
+    });
+  }, [searchParams, clearCart]);
+
+  if (status === 'loading') {
+    return (
+      <div className="min-h-screen bg-zinc-950 text-white flex flex-col items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-500 mb-4"></div>
+        <p className="text-xl">Verifying your purchase...</p>
+      </div>
+    );
+  }
+
+  if (status === 'error') {
+    return (
+      <div className="min-h-screen bg-zinc-950 text-white flex flex-col items-center justify-center p-8">
+        <h1 className="text-3xl font-bold text-red-500 mb-4">Payment Verification Failed</h1>
+        <p className="text-gray-400 mb-8">We couldn't confirm your payment. If you were charged, please contact support.</p>
+        <Link href="/contact" className="px-6 py-3 bg-white/10 hover:bg-white/20 rounded-full">
+          Contact Support
+        </Link>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-zinc-950 text-white">
+      <Header />
+      <main className="container mx-auto px-4 py-12 md:py-20 max-w-4xl">
+        <div className="bg-zinc-900/50 border border-indigo-500/30 rounded-3xl p-8 md:p-12 text-center animate-in fade-in slide-in-from-bottom-8 duration-700">
+          <div className="inline-flex items-center justify-center w-20 h-20 bg-green-500/20 rounded-full mb-6">
+            <svg className="w-10 h-10 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-400">
+            Thank you for your support!
+          </h1>
+          <p className="text-xl text-gray-300 mb-12">
+            Your purchase helps keep the music alive.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+            {/* Digital Downloads */}
+            <div className={`space-y-6 ${hasPhysicalGoods ? '' : 'col-span-2 md:col-span-2'}`}>
+              <h2 className="text-2xl font-bold border-b border-white/10 pb-2">Digital Downloads</h2>
+              {purchasedItems.filter(i => i.type !== 'gear').length === 0 && (
+                <p className="text-gray-500 italic">No digital items in this order.</p>
+              )}
+              {purchasedItems.filter(i => i.type !== 'gear').map((item) => (
+                <div key={item.id} className="bg-white/5 rounded-xl p-4 flex gap-4 items-start">
+                  <div className="relative w-20 h-20 flex-shrink-0 bg-zinc-800 rounded-lg overflow-hidden">
+                    <Image src={item.artwork} alt={item.title} fill className="object-cover" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-bold text-lg mb-1">{item.title}</h3>
+                    <p className="text-sm text-gray-400 mb-3">{item.artist}</p>
+                    
+                    <div className="flex flex-wrap gap-2">
+                      {item.files?.mp3 && (
+                        <a 
+                          href={`/api/secure-download?pi=${paymentIntentId}&secret=${clientSecret}&item=${item.id}&format=mp3`}
+                          className="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 rounded-lg text-xs font-bold uppercase tracking-wider flex items-center gap-1 transition-colors"
+                        >
+                          {item.files.mp3.toLowerCase().endsWith('.m4a') ? 'DOWNLOAD M4A' : 'DOWNLOAD MP3'}
+                        </a>
+                      )}
+                      {item.files?.wav && (
+                        <a 
+                          href={`/api/secure-download?pi=${paymentIntentId}&secret=${clientSecret}&item=${item.id}&format=wav`}
+                          className="px-3 py-1.5 bg-purple-600 hover:bg-purple-700 rounded-lg text-xs font-bold uppercase tracking-wider flex items-center gap-1 transition-colors"
+                        >
+                          DOWNLOAD WAV
+                        </a>
+                      )}
+                      {item.files?.mp3_zip && (
+                        <a 
+                          href={`/api/secure-download?pi=${paymentIntentId}&secret=${clientSecret}&item=${item.id}&format=mp3_zip`}
+                          className="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 rounded-lg text-xs font-bold uppercase tracking-wider flex items-center gap-1 transition-colors"
+                        >
+                          {item.files.mp3_zip.toLowerCase().includes('m4a') ? 'DOWNLOAD M4A ZIP' : 'DOWNLOAD MP3 ZIP'}
+                        </a>
+                      )}
+                      {item.files?.wav_zip && (
+                        <a 
+                          href={`/api/secure-download?pi=${paymentIntentId}&secret=${clientSecret}&item=${item.id}&format=wav_zip`}
+                          className="px-3 py-1.5 bg-purple-600 hover:bg-purple-700 rounded-lg text-xs font-bold uppercase tracking-wider flex items-center gap-1 transition-colors"
+                        >
+                          DOWNLOAD WAV ZIP
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Physical Goods */}
+            {hasPhysicalGoods && (
+              <div className="space-y-6">
+                <h2 className="text-2xl font-bold border-b border-white/10 pb-2">Physical Shipment</h2>
+                <div className="bg-white/5 rounded-xl p-6 border border-white/10">
+                  <p className="text-gray-300 mb-4">
+                    Your merch is being prepared! We have received your shipping address and will notify you when it ships.
+                  </p>
+                  <div className="flex items-center gap-2 text-indigo-400">
+                    <div className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></div>
+                    <span className="text-sm font-bold uppercase tracking-widest">Processing Order</span>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div className="mt-12 text-center">
+            <Link href="/" className="text-gray-400 hover:text-white underline decoration-white/20 hover:decoration-white transition-all">
+              Return to Homepage
+            </Link>
+          </div>
+        </div>
+      </main>
+    </div>
+  );
+}
+
+export default function SuccessPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-zinc-950 text-white flex flex-col items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-500 mb-4"></div>
+        <p className="text-xl">Verifying your purchase...</p>
+      </div>
+    }>
+      <SuccessPageContent />
+    </Suspense>
+  );
+}

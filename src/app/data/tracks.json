@@ -1,0 +1,52 @@
+[
+  {
+    "id": "track-001",
+    "title": "Fern Drip",
+    "artist": "its.just.john Feat. Dj Scotty Doo",
+    "slug": "fern-drip",
+    "audioSrc": "/audio/Fern Drip.m4a",
+    "length": "3:33",
+    "priceCents": 100,
+    "cover": "/audio/Fern Drip Album Art.png"
+  },
+  {
+    "id": "track-002",
+    "title": "Abundance",
+    "artist": "its.just.john",
+    "slug": "abundance",
+    "audioSrc": "/audio/Abundance.m4a",
+    "length": "3:42",
+    "priceCents": 100,
+    "cover": "/audio/Abundance.png"
+  },
+  {
+    "id": "track-003",
+    "title": "Right For Me",
+    "artist": "its.just.john",
+    "slug": "right-for-me",
+    "audioSrc": "/audio/Right For Me.m4a",
+    "length": "4:17",
+    "priceCents": 100,
+    "cover": "/audio/Right For Me  2.png"
+  },
+  {
+    "id": "track-004",
+    "title": "Intentions",
+    "artist": "its.just.john",
+    "slug": "intentions",
+    "audioSrc": "/audio/Intentions.m4a",
+    "length": "3:13",
+    "priceCents": 100,
+    "cover": "/audio/intentionsalbumart.png"
+  },
+  {
+    "id": "track-005",
+    "title": "PSA",
+    "artist": "its.just.john",
+    "slug": "psa",
+    "audioSrc": "/audio/PSA.m4a",
+    "length": "3:01",
+    "priceCents": 100,
+    "cover": "/audio/PSA.png"
+  }
+]
