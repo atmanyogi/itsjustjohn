@@ -36,6 +36,67 @@ function SuccessPageContent() {
   const [clientSecret, setClientSecret] = useState<string>("");
   const [hasPhysicalGoods, setHasPhysicalGoods] = useState(false);
 
+  // Email receipt options
+  const [wantsReceipt, setWantsReceipt] = useState(false);
+  const [isReceiptModalOpen, setIsReceiptModalOpen] = useState(false);
+  const [receiptEmail, setReceiptEmail] = useState("");
+  const [receiptStatus, setReceiptEmailStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [receiptError, setReceiptError] = useState("");
+
+  const handleReceiptToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const checked = e.target.checked;
+    setWantsReceipt(checked);
+    if (checked) {
+      setIsReceiptModalOpen(true);
+      setReceiptEmailStatus('idle');
+      setReceiptError("");
+    }
+  };
+
+  const submitReceiptEmail = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setReceiptEmailStatus('submitting');
+    setReceiptError("");
+
+    // Anti-Script Injection Sanitization and rigorous validation
+    const sanitizedEmail = receiptEmail.trim().toLowerCase()
+      .replace(/<[^>]*>/g, '') // strip HTML/Script tags
+      .replace(/[<>\"'&]/g, ''); // strip potential injection characters
+
+    const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+    if (!emailRegex.test(sanitizedEmail) || sanitizedEmail.length > 254) {
+      setReceiptEmailStatus('error');
+      setReceiptError("Please enter a valid email address.");
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/stripe/submit-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          pi: paymentIntentId,
+          secret: clientSecret,
+          email: sanitizedEmail
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to submit receipt request.");
+      }
+
+      setReceiptEmailStatus('success');
+    } catch (err: any) {
+      console.error("Receipt email error:", err);
+      setReceiptEmailStatus('error');
+      setReceiptError(err.message || "An unexpected error occurred. Please try again.");
+    }
+  };
+
   useEffect(() => {
     const client_secret = searchParams.get('payment_intent_client_secret');
     const payment_intent = searchParams.get('payment_intent');
@@ -235,6 +296,22 @@ function SuccessPageContent() {
             )}
           </div>
 
+          {/* Email Receipt Question Checkbox */}
+          <div className="mt-10 p-6 bg-white/5 border border-white/10 rounded-2xl max-w-md mx-auto text-left">
+            <label className="flex items-start gap-4 cursor-pointer select-none">
+              <input 
+                type="checkbox"
+                checked={wantsReceipt}
+                onChange={handleReceiptToggle}
+                className="w-5 h-5 rounded border-white/10 bg-zinc-800 text-indigo-600 focus:ring-indigo-500 accent-indigo-600 mt-1 cursor-pointer"
+              />
+              <div>
+                <span className="font-bold text-white block text-sm">Would you like to receive an emailed receipt?</span>
+                <span className="text-xs text-gray-400 block mt-1">We will securely update your payment details to issue an official invoice receipt.</span>
+              </div>
+            </label>
+          </div>
+
           <div className="mt-12 text-center">
             <Link href="/" className="text-gray-400 hover:text-white underline decoration-white/20 hover:decoration-white transition-all">
               Return to Homepage
@@ -242,6 +319,101 @@ function SuccessPageContent() {
           </div>
         </div>
       </main>
+
+      {/* Receipt Modal Overlay */}
+      {isReceiptModalOpen && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 z-[999999]">
+          <div 
+            className="bg-zinc-950 border border-white/10 rounded-3xl p-6 md:p-8 max-w-md w-full relative animate-in fade-in zoom-in-95 duration-200 shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button 
+              onClick={() => {
+                setIsReceiptModalOpen(false);
+                setWantsReceipt(receiptStatus === 'success'); // Keep checked if successfully saved
+              }}
+              className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            {receiptStatus === 'success' ? (
+              <div className="text-center py-6">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-green-500/20 rounded-full mb-4">
+                  <svg className="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold mb-2 text-white">Receipt Requested!</h3>
+                <p className="text-gray-400 text-sm mb-6">
+                  A confirmation receipt will be delivered to <strong className="text-white font-semibold">{receiptEmail}</strong> shortly.
+                </p>
+                <button
+                  onClick={() => setIsReceiptModalOpen(false)}
+                  className="w-full py-3 bg-white/10 hover:bg-white/20 text-white rounded-xl font-bold transition-all text-sm"
+                >
+                  Done
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={submitReceiptEmail} className="space-y-4">
+                <h3 className="text-2xl font-bold text-white mb-2">Email Checkout Receipt</h3>
+                <p className="text-gray-400 text-sm mb-4">
+                  Enter your email below to securely trigger the automatic invoice receipt delivery system.
+                </p>
+
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Email Address</label>
+                  <input 
+                    type="text" 
+                    required
+                    value={receiptEmail}
+                    onChange={(e) => setReceiptEmail(e.target.value)}
+                    placeholder="you@example.com"
+                    disabled={receiptStatus === 'submitting'}
+                    className="w-full px-4 py-3 bg-zinc-900 border border-white/10 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:border-indigo-500 disabled:opacity-50 text-base"
+                    maxLength={254}
+                  />
+                </div>
+
+                {receiptError && (
+                  <div className="p-3 bg-red-500/10 border border-red-500/20 text-red-400 rounded-xl text-sm">
+                    {receiptError}
+                  </div>
+                )}
+
+                <div className="flex gap-3 pt-4">
+                  <button
+                    type="button"
+                    disabled={receiptStatus === 'submitting'}
+                    onClick={() => {
+                      setIsReceiptModalOpen(false);
+                      setWantsReceipt(false);
+                    }}
+                    className="flex-1 py-3 bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white rounded-xl font-bold transition-all text-sm disabled:opacity-50"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={receiptStatus === 'submitting'}
+                    className="flex-1 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold transition-all text-sm disabled:opacity-50 flex items-center justify-center gap-2"
+                  >
+                    {receiptStatus === 'submitting' ? (
+                      <>
+                        <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
+                        Sending...
+                      </>
+                    ) : "Send Receipt"}
+                  </button>
+                </div>
+              </form>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

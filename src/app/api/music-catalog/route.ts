@@ -1,23 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
+import catalog from '../../data/music_catalog.json';
 
 // GET /api/music-catalog - Returns the music catalog
 export async function GET() {
   try {
-    // Read the music catalog from the JSON file
-    const catalogPath = path.join(process.cwd(), 'src/app/data/music_catalog.json');
-
-    if (!fs.existsSync(catalogPath)) {
-      return NextResponse.json(
-        { error: 'Music catalog not found' },
-        { status: 404 }
-      );
-    }
-
-    const catalogData = fs.readFileSync(catalogPath, 'utf8');
-    const catalog = JSON.parse(catalogData);
-
+    // Statically imported catalog is bundled smoothly by Vercel / Next.js
     return NextResponse.json(catalog);
   } catch (error) {
     console.error('Error loading music catalog:', error);
