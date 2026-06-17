@@ -97,8 +97,8 @@ export default function CloudTransition() {
   return (
     <div className="absolute w-full" style={{
       // Position to cover the transition line between lid and condensation
-      // Shift clouds up in landscape so they sit closer to top of lid.png and clear the gallery
-      top: isLandscape ? "-450px" : (isMobile ? "-250px" : "-2500px"), 
+      // Shift clouds up significantly more in horizontal mobile views so they block less and rise cleanly closer to solid.png/lid.png
+      top: isLandscape ? "-1400px" : (isMobile ? "-250px" : "-2500px"), 
       left: 0,
       right: 0,
       height: "400px", // Maintained height for coverage

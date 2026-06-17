@@ -35,6 +35,22 @@ export default function LandingMusicSection({ className, style }: LandingMusicSe
   const [storeOpen, setStoreOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
+  // Failure-immune, non-Vdom optimized native Audio objects pre-loaded inside client-only memory Refs
+  const primaryAudioRef = useRef<HTMLAudioElement | null>(null);
+  const backupAudioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      primaryAudioRef.current = new Audio("/glass1.wav");
+      primaryAudioRef.current.preload = "auto";
+      primaryAudioRef.current.load();
+
+      backupAudioRef.current = new Audio("/glass.wav");
+      backupAudioRef.current.preload = "auto";
+      backupAudioRef.current.load();
+    }
+  }, []);
+
   // Handle responsive design
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -102,15 +118,23 @@ export default function LandingMusicSection({ className, style }: LandingMusicSe
       }
     }
 
-    // Play glass break sound via preloaded native HTML5 tag with Howler fallback
+    // Play glass break sound via preloaded native Audio elements with cascading failover fallback
     try {
-      const nativeAudio = document.getElementById("native-shatter-sound") as HTMLAudioElement;
-      if (nativeAudio) {
-        nativeAudio.currentTime = 0;
-        nativeAudio.play().catch((playErr) => {
-          console.warn("Native audio decode deferred; falling back to Web Audio", playErr);
-          const sound = getGlassShatterSound();
-          if (sound) sound.play();
+      if (primaryAudioRef.current) {
+        primaryAudioRef.current.currentTime = 0;
+        primaryAudioRef.current.play().catch((playErr) => {
+          console.warn("Primary native audio decodes failed, transitioning to backup sound", playErr);
+          if (backupAudioRef.current) {
+            backupAudioRef.current.currentTime = 0;
+            backupAudioRef.current.play().catch((backupErr) => {
+              console.warn("Backup native audio failed; fallback to Web Audio Howl", backupErr);
+              const sound = getGlassShatterSound();
+              if (sound) sound.play();
+            });
+          } else {
+            const sound = getGlassShatterSound();
+            if (sound) sound.play();
+          }
         });
       } else {
         const sound = getGlassShatterSound();
@@ -252,9 +276,6 @@ export default function LandingMusicSection({ className, style }: LandingMusicSe
         onClose={() => setStoreOpen(false)}
         currentTrackId={currentTrackId || undefined}
       />
-
-      {/* Preloaded native HTML5 audio for failure-immune playing on iOS/Android first-tap user gestures */}
-      <audio id="native-shatter-sound" src="/glass1.wav" preload="auto" className="hidden" />
     </section>
   );
 }
