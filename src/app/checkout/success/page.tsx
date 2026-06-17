@@ -7,6 +7,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Header from '../../components/Header';
 import { useCart } from '../../context/CartContext';
+import catalog from '../../data/music_catalog.json';
 
 // Load Stripe (Publishable Key)
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || 'pk_test_placeholder');
@@ -127,57 +128,65 @@ function SuccessPageContent() {
         // Retrieve items from metadata
         // Cast to any to avoid TS errors with Stripe types that might be incomplete
         const metadata = (paymentIntent as any).metadata || {};
-        const itemIdsString = metadata['itemIds'];
-        const hasPhysical = metadata['hasPhysicalGoods'] === 'true';
+        let itemIdsString = metadata['itemIds'];
+        let hasPhysical = metadata['hasPhysicalGoods'] === 'true';
+
+        // 100% Fail-safe client-side backup fallback:
+        // Try to retrieve order items from localStorage in case Stripe publishable keys censor metadata
+        if (!itemIdsString) {
+          try {
+            const cachedPendingStr = localStorage.getItem('sentient_pending_items');
+            if (cachedPendingStr) {
+              const cachedPending = JSON.parse(cachedPendingStr);
+              itemIdsString = cachedPending.itemIds;
+              hasPhysical = cachedPending.hasPhysical || hasPhysical;
+            }
+          } catch (storageErr) {
+            console.error("Failed to restore pending items from localStorage fallback:", storageErr);
+          }
+        }
+
         setHasPhysicalGoods(hasPhysical);
 
         if (itemIdsString) {
           const itemIds = itemIdsString.split(',');
-          // Fetch catalog to get details
+          // Retrieve catalog details instantly via static bundling (No API dynamic file dependencies)
           try {
-            const res = await fetch('/api/music-catalog');
-            const data = await res.json();
-            
             const items: PurchasedItem[] = [];
             itemIds.forEach((id: string) => {
-              // Check tracks
-              let item = data.tracks.find((t: any) => t.id === id);
+              // Check tracks in statically imported catalog (Typed as any to bypass Next.js strict TS inference)
+              let item: any = catalog.tracks.find((t: any) => t.id === id);
               // Check albums
-              if (!item) item = data.albums.find((a: any) => a.id === id);
-              // Check gear (if available in API) - Gear might not be in music-catalog.json API usually
-              // If gear is not in API, we might need a separate lookup or just show a generic placeholder.
-              // For now, assuming gear is handled separately or we need to fetch gear catalog.
-              // Given the structure, gear logic was in GearModal.
-              // We'll fallback to a generic object if not found in catalog but ID exists.
+              if (!item) item = catalog.albums.find((a: any) => a.id === id);
               
               if (item) {
                 items.push({
                   id: item.id,
                   title: item.title,
                   artist: item.artist,
-                  type: item.tracks ? 'album' : 'track', // heuristic
+                  type: (item as any).tracks ? 'album' : 'track', // heuristic
                   artwork: item.artwork,
-                  files: item.files
+                  files: item.files as any
                 });
               } else {
-                // Try to identify if it's gear
-                // If ID is not in music catalog, it might be gear.
-                // We'll just display a placeholder for physical item if we can't find it.
-                // (In a real app, we'd have a unified product API).
-                if (hasPhysical) {
-                   // Placeholder for gear item
+                // If it is physical, create a visual receipt placeholder
+                if (id.startsWith('gear-') || hasPhysical) {
                    items.push({
                      id: id,
-                     title: "Physical Item",
+                     title: "Physical Gear",
                      type: 'gear',
                      artwork: '/teejar.png'
                    });
-                }
+                 }
               }
             });
+
             setPurchasedItems(items);
+
+            // Clean up localStorage backup ordering state once processed successfully
+            localStorage.removeItem('sentient_pending_items');
           } catch (e) {
-            console.error("Failed to load catalog details", e);
+            console.error("Failed to process catalog details fallback:", e);
           }
         }
       } else {

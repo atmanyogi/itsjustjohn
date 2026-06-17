@@ -36,6 +36,18 @@ function CheckoutForm() {
 
     setIsLoading(true);
 
+    // Save pending items to localStorage BEFORE redirecting to Stripe.
+    // This provides a 100% stable client-side fallback if Stripe's API
+    // redacts/re-sanitizes PaymentIntent metadata on client publishable keys.
+    try {
+      localStorage.setItem('sentient_pending_items', JSON.stringify({
+        itemIds: cart.map(i => i.id).join(','),
+        hasPhysical: cart.some(i => i.type === 'gear')
+      }));
+    } catch (err) {
+      console.error("Failed to set redirect state backup", err);
+    }
+
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
