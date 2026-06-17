@@ -141,7 +141,7 @@ export default function MarketingPage() {
       </div>
 
       {/* Cloud transition positioned exactly where it was with animations */}
-      <div className="relative w-full mt-[-71svh] md:mt-[-15vh] z-25 pb-[20vh] md:pb-0">
+      <div className="relative w-full mt-[-71vh] md:mt-[-15vh] z-25 pb-[20vh] md:pb-0">
         <CloudTransition />
       </div>
 
@@ -154,7 +154,7 @@ export default function MarketingPage() {
 
       {/* Landing Music Section with all its attributes */}
       <div id="music-section">
-        <LandingMusicSection className="-mt-[80svh] md:-mt-[210vh]" />
+        <LandingMusicSection className="-mt-[80vh] md:-mt-[210vh]" />
       </div>
 
 
@@ -186,7 +186,7 @@ export default function MarketingPage() {
         {/* teejar.png positioned relative to clotheslinefern */}
         <div
           id="shop-section"
-          className="absolute top-[58svh] left-0 right-0 mx-auto w-screen h-auto z-999 md:top-[19vh] md:right-[-60vw] md:w-[65vw] md:h-auto animate-float-pulse cursor-pointer"
+          className="absolute top-[58vh] left-0 right-0 mx-auto w-screen h-auto z-999 md:top-[19vh] md:right-[-60vw] md:w-[65vw] md:h-auto animate-float-pulse cursor-pointer"
           onClick={handleTeeJarClick}
         >
           <div className="relative w-full h-full">

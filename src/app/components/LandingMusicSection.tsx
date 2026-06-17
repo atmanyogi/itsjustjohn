@@ -85,28 +85,36 @@ export default function LandingMusicSection({ className, style }: LandingMusicSe
   }, [queueLength, audioStore]);
 
 
-  const handleTap = () => {
+  const handleTap = (e?: React.MouseEvent | React.TouchEvent | React.KeyboardEvent) => {
     if (shattered) return; 
 
-    // Haptic feedback for mobile with fallback and debug
-    if (typeof window !== 'undefined' && navigator.vibrate) {
-      try {
-        const didVibrate = navigator.vibrate(100);
-        if (!didVibrate) {
-          console.warn("Vibration API call returned false, vibration may be blocked.");
-        }
-      } catch (e) {
-        console.warn("Vibration not supported or blocked", e);
-      }
-    } else {
-      console.warn("Vibration API not supported on this device.");
+    // Prevent double triggers from synthetic click fallback on touch devices
+    if (e && e.type === 'touchstart') {
+      e.preventDefault();
     }
 
-    // Play glass break sound via preloaded touch-unlocked Howler engine
+    // Haptic feedback: Rich dual sharp shock pulses simulating material cracks
+    if (typeof window !== 'undefined' && navigator.vibrate) {
+      try {
+        navigator.vibrate([100, 50, 100]); 
+      } catch (err) {
+        console.warn("Vibration deferred/blocked by client OS", err);
+      }
+    }
+
+    // Play glass break sound via preloaded native HTML5 tag with Howler fallback
     try {
-      const sound = getGlassShatterSound();
-      if (sound) {
-        sound.play();
+      const nativeAudio = document.getElementById("native-shatter-sound") as HTMLAudioElement;
+      if (nativeAudio) {
+        nativeAudio.currentTime = 0;
+        nativeAudio.play().catch((playErr) => {
+          console.warn("Native audio decode deferred; falling back to Web Audio", playErr);
+          const sound = getGlassShatterSound();
+          if (sound) sound.play();
+        });
+      } else {
+        const sound = getGlassShatterSound();
+        if (sound) sound.play();
       }
     } catch (e) {
       console.warn("Glass crack sound failed to play:", e);
@@ -145,6 +153,7 @@ export default function LandingMusicSection({ className, style }: LandingMusicSe
       <motion.div
         className={`relative z-10 w-full max-w-sm md:max-w-2xl lg:max-w-4xl ${minHeightClasses} h-125 md:h-175 rounded-2xl shadow-lg overflow-hidden flex flex-col mt-12 md:mt-20`}
         onClick={!shattered ? handleTap : undefined} 
+        onTouchStart={!shattered ? handleTap : undefined}
         role="button" 
         tabIndex={0} 
         onKeyPress={(e) => { if (!shattered && (e.key === 'Enter' || e.key === ' ')) handleTap(); }}
@@ -243,6 +252,9 @@ export default function LandingMusicSection({ className, style }: LandingMusicSe
         onClose={() => setStoreOpen(false)}
         currentTrackId={currentTrackId || undefined}
       />
+
+      {/* Preloaded native HTML5 audio for failure-immune playing on iOS/Android first-tap user gestures */}
+      <audio id="native-shatter-sound" src="/glass1.wav" preload="auto" className="hidden" />
     </section>
   );
 }

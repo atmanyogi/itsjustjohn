@@ -10,6 +10,7 @@ export default function CloudTransition() {
   
   // State to track if we're on mobile or desktop
   const [isMobile, setIsMobile] = useState(false);
+  const [isLandscape, setIsLandscape] = useState(false);
 
   // Handle responsive design using high-performance matchMedia to avoid resize thrashing on scroll
   // Detects both small widths (portrait mobile) and small heights (landscape mobile)
@@ -23,6 +24,13 @@ export default function CloudTransition() {
       setIsMobile(e.matches);
     };
 
+    const checkOrientation = () => {
+      setIsLandscape(window.innerWidth > window.innerHeight && window.innerHeight < 550);
+    };
+
+    checkOrientation();
+    window.addEventListener("resize", checkOrientation);
+
     if (mediaQuery.addEventListener) {
       mediaQuery.addEventListener('change', handleChange);
     } else {
@@ -30,6 +38,7 @@ export default function CloudTransition() {
     }
 
     return () => {
+      window.removeEventListener("resize", checkOrientation);
       if (mediaQuery.removeEventListener) {
         mediaQuery.removeEventListener('change', handleChange);
       } else {
@@ -88,7 +97,8 @@ export default function CloudTransition() {
   return (
     <div className="absolute w-full" style={{
       // Position to cover the transition line between lid and condensation
-      top: isMobile ? "-250px" : "-2500px", // Brought clouds down additional 2/3 page on mobile
+      // Shift clouds up in landscape so they sit closer to top of lid.png and clear the gallery
+      top: isLandscape ? "-450px" : (isMobile ? "-250px" : "-2500px"), 
       left: 0,
       right: 0,
       height: "400px", // Maintained height for coverage

@@ -66,7 +66,7 @@ export default function ScrollParallax({ children, dataDepth = 1 }: ScrollParall
       animationRef.current = requestAnimationFrame(updatePosition);
     };
 
-    if (isVisible) {
+    if (isVisible && !isMobile) {
       window.addEventListener('scroll', handleScroll, { passive: true });
       // Initial position
       updatePosition();
