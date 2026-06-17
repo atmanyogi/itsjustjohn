@@ -302,17 +302,17 @@ function SuccessPageContent() {
                 <div className="mt-8 bg-gradient-to-br from-indigo-950/30 to-purple-950/30 border border-indigo-500/20 rounded-2xl p-6 space-y-4 shadow-xl text-left animate-in fade-in slide-in-from-bottom-4 duration-500">
                   <div>
                     <h4 className="text-sm font-bold uppercase tracking-wider text-indigo-400 mb-1.5 flex items-center gap-1.5">
-                      💡 Choose Your Format & Keep Access
+                      💡 Choose Your Format
                     </h4>
                     <p className="text-sm text-gray-200 leading-relaxed">
                       If you want to listen strictly as a music lover and fan, download the lightweight <strong className="text-white font-bold">M4A</strong> format. 
                       If you're a serious audio professional or audiophile who will be using this audio in a professional setting (such as DJ sets, radio, live venues), please choose the lossless high-fidelity <strong className="text-white font-bold">WAV</strong> files!
                     </p>
-                    <div className="bg-white/5 rounded-xl p-3 border border-white/5 flex gap-2 items-start mt-3">
-                      <span className="text-base select-none">🔖</span>
-                      <p className="text-xs text-gray-400 leading-relaxed">
-                        <strong className="text-indigo-300 font-bold block mb-0.5">Tip: Bookmark this page URL!</strong>
-                        Since standard billing transaction invoice emails are static and cannot dynamically embed secure, expiring download endpoints, your current page URL handles that. Bookmark it or save it anywhere to return and download your music formats at any time.
+                    <div className="bg-amber-500/10 rounded-xl p-3 border border-amber-500/20 flex gap-2 items-start mt-3">
+                      <span className="text-base select-none">⚠️</span>
+                      <p className="text-xs text-amber-200 leading-relaxed">
+                        <strong className="text-amber-400 font-bold block mb-0.5">Important: Complete Your Downloads Now!</strong>
+                        You are free to download all of your songs and any format options (both M4A and WAV) as many times as you like in this window. However, for your security and anti-piracy protection, once you close this window or navigate away, this secure download portal will become inactive. Please make sure to download your files to your device or Files app now!
                       </p>
                     </div>
                   </div>
