@@ -286,6 +286,26 @@ function SuccessPageContent() {
                   </div>
                 </div>
               ))}
+
+              {purchasedItems.filter(i => i.type !== 'gear').length > 0 && (
+                <div className="mt-8 bg-gradient-to-br from-indigo-950/30 to-purple-950/30 border border-indigo-500/20 rounded-2xl p-6 space-y-4 shadow-xl text-left animate-in fade-in slide-in-from-bottom-4 duration-500">
+                  <div>
+                    <h4 className="text-sm font-bold uppercase tracking-wider text-indigo-400 mb-1.5 flex items-center gap-1.5">
+                      💡 Choose Your Format
+                    </h4>
+                    <p className="text-sm text-gray-200 leading-relaxed">
+                      If you want to listen strictly as a music lover and fan, download the lightweight <strong className="text-white font-bold">M4A</strong> format. 
+                      If you're a serious audio professional or audiophile who will be using this audio in a professional setting (such as DJ sets, radio, live venues), please choose the lossless high-fidelity <strong className="text-white font-bold">WAV</strong> files!
+                    </p>
+                  </div>
+                  <div className="pt-3 border-t border-white/5 flex flex-col gap-1">
+                    <p className="text-sm italic text-gray-300">
+                      "Thank you so much for supporting my art, vision, and creations. Every download helps build more experiences. Aloha!"
+                    </p>
+                    <span className="block text-sm font-bold text-indigo-300 mt-1">— john 🌿</span>
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Physical Goods */}
