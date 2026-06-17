@@ -99,6 +99,9 @@ function SuccessPageContent() {
   };
 
   useEffect(() => {
+    // If payment is already successfully verified, lock status to success to prevent URL hydration or navigation strips from downgrading state
+    if (status === 'success') return;
+
     const client_secret = searchParams.get('payment_intent_client_secret');
     const payment_intent = searchParams.get('payment_intent');
 
@@ -253,6 +256,8 @@ function SuccessPageContent() {
                       {item.files?.mp3 && (
                         <a 
                           href={`/api/secure-download?pi=${paymentIntentId}&secret=${clientSecret}&item=${item.id}&format=mp3`}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 rounded-lg text-xs font-bold uppercase tracking-wider flex items-center gap-1 transition-colors"
                         >
                           {item.files.mp3.toLowerCase().endsWith('.m4a') ? 'DOWNLOAD M4A' : 'DOWNLOAD MP3'}
@@ -261,6 +266,8 @@ function SuccessPageContent() {
                       {item.files?.wav && (
                         <a 
                           href={`/api/secure-download?pi=${paymentIntentId}&secret=${clientSecret}&item=${item.id}&format=wav`}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="px-3 py-1.5 bg-purple-600 hover:bg-purple-700 rounded-lg text-xs font-bold uppercase tracking-wider flex items-center gap-1 transition-colors"
                         >
                           DOWNLOAD WAV
@@ -269,6 +276,8 @@ function SuccessPageContent() {
                       {item.files?.mp3_zip && (
                         <a 
                           href={`/api/secure-download?pi=${paymentIntentId}&secret=${clientSecret}&item=${item.id}&format=mp3_zip`}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 rounded-lg text-xs font-bold uppercase tracking-wider flex items-center gap-1 transition-colors"
                         >
                           {item.files.mp3_zip.toLowerCase().includes('m4a') ? 'DOWNLOAD M4A ZIP' : 'DOWNLOAD MP3 ZIP'}
@@ -277,6 +286,8 @@ function SuccessPageContent() {
                       {item.files?.wav_zip && (
                         <a 
                           href={`/api/secure-download?pi=${paymentIntentId}&secret=${clientSecret}&item=${item.id}&format=wav_zip`}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="px-3 py-1.5 bg-purple-600 hover:bg-purple-700 rounded-lg text-xs font-bold uppercase tracking-wider flex items-center gap-1 transition-colors"
                         >
                           DOWNLOAD WAV ZIP
@@ -291,12 +302,19 @@ function SuccessPageContent() {
                 <div className="mt-8 bg-gradient-to-br from-indigo-950/30 to-purple-950/30 border border-indigo-500/20 rounded-2xl p-6 space-y-4 shadow-xl text-left animate-in fade-in slide-in-from-bottom-4 duration-500">
                   <div>
                     <h4 className="text-sm font-bold uppercase tracking-wider text-indigo-400 mb-1.5 flex items-center gap-1.5">
-                      💡 Choose Your Format
+                      💡 Choose Your Format & Keep Access
                     </h4>
                     <p className="text-sm text-gray-200 leading-relaxed">
                       If you want to listen strictly as a music lover and fan, download the lightweight <strong className="text-white font-bold">M4A</strong> format. 
                       If you're a serious audio professional or audiophile who will be using this audio in a professional setting (such as DJ sets, radio, live venues), please choose the lossless high-fidelity <strong className="text-white font-bold">WAV</strong> files!
                     </p>
+                    <div className="bg-white/5 rounded-xl p-3 border border-white/5 flex gap-2 items-start mt-3">
+                      <span className="text-base select-none">🔖</span>
+                      <p className="text-xs text-gray-400 leading-relaxed">
+                        <strong className="text-indigo-300 font-bold block mb-0.5">Tip: Bookmark this page URL!</strong>
+                        Since standard billing transaction invoice emails are static and cannot dynamically embed secure, expiring download endpoints, your current page URL handles that. Bookmark it or save it anywhere to return and download your music formats at any time.
+                      </p>
+                    </div>
                   </div>
                   <div className="pt-3 border-t border-white/5 flex flex-col gap-1">
                     <p className="text-sm italic text-gray-300">
