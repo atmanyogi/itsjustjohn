@@ -53,7 +53,7 @@ export default function MarketingPage() {
   };
 
   return (
-    <main className="relative h-full overflow-x-hidden w-full max-w-full">
+    <main className="relative min-h-screen overflow-x-hidden w-full max-w-full">
       <Header />
 
       {/* First visual in chain: IJJ 4.png */}

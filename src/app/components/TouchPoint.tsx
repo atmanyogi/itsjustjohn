@@ -10,8 +10,17 @@ interface TouchPointProps {
   className?: string; // Allow minimal styling override
 }
 
+import { useEffect } from 'react';
+
 const TouchPoint: React.FC<TouchPointProps> = ({ top, left, title, onClick, className }) => {
   const [showTooltip, setShowTooltip] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
+    }
+  }, []);
 
   // Determine tooltip horizontal alignment based on touchpoint's coordinate placement to prevent clipping
   let alignmentClass = "left-1/2 transform -translate-x-1/2";
@@ -36,11 +45,14 @@ const TouchPoint: React.FC<TouchPointProps> = ({ top, left, title, onClick, clas
       style={{ top, left, transform: 'translate(-50%, -50%)' }}
       onClick={(e) => {
         e.stopPropagation();
-        if (onClick) onClick();
-        setShowTooltip(!showTooltip);
+        if (onClick) {
+          onClick();
+        } else {
+          setShowTooltip(!showTooltip);
+        }
       }}
-      onMouseEnter={() => setShowTooltip(true)}
-      onMouseLeave={() => setShowTooltip(false)}
+      onMouseEnter={isTouchDevice ? undefined : () => setShowTooltip(true)}
+      onMouseLeave={isTouchDevice ? undefined : () => setShowTooltip(false)}
     >
       {/* Pulsing visual */}
       <div className="absolute inset-0 bg-white/30 rounded-full animate-ping" style={{ animationDuration: '3s' }}></div>

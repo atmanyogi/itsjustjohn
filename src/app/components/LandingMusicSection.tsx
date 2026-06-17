@@ -10,6 +10,20 @@ import { FaXTwitter } from 'react-icons/fa6';
 import tracks from '../data/tracks.json';
 import { useAudioStore, Track } from '../lib/audio';
 import PlayerPositionPoller from './PlayerPositionPoller';
+import { Howl } from 'howler';
+
+// Create a preloaded pooled Howler instance for localized glass shatter
+let glassShatterSound: Howl | null = null;
+const getGlassShatterSound = () => {
+  if (typeof window !== 'undefined' && !glassShatterSound) {
+    glassShatterSound = new Howl({
+      src: ['/glass1.wav'],
+      volume: 1.0,
+      preload: true
+    });
+  }
+  return glassShatterSound;
+};
 
 interface LandingMusicSectionProps {
   className?: string; 
@@ -88,11 +102,15 @@ export default function LandingMusicSection({ className, style }: LandingMusicSe
       console.warn("Vibration API not supported on this device.");
     }
 
-    // Play glass break sound
-    const audio = new Audio('/glass1.wav');
-    audio.play().catch(() => {
-      // Handle play error silently (e.g., user hasn't interacted yet)
-    });
+    // Play glass break sound via preloaded touch-unlocked Howler engine
+    try {
+      const sound = getGlassShatterSound();
+      if (sound) {
+        sound.play();
+      }
+    } catch (e) {
+      console.warn("Glass crack sound failed to play:", e);
+    }
 
     // Save shatter state to sessionStorage
     try {

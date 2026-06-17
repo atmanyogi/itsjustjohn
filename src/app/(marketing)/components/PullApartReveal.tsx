@@ -108,7 +108,7 @@ export default function PullApartReveal({
           cursor-pointer
           pointer-events-auto
           select-none
-          ${isOpen ? "-translate-x-[70%]" : "translate-x-0"}
+          ${isOpen ? "-translate-x-[85%]" : "translate-x-0"}
         `}
         style={{ width: "62.4%", transitionProperty: "transform", transitionDuration: `${animationDuration}ms`, transitionTimingFunction: "ease-in-out" }}
         onClick={() => {
@@ -128,7 +128,7 @@ export default function PullApartReveal({
           cursor-pointer
           pointer-events-auto
           select-none
-          ${isOpen ? "translate-x-[70%]" : "translate-x-0"}
+          ${isOpen ? "translate-x-[85%]" : "translate-x-0"}
         `}
         style={{ width: "62.4%", transitionProperty: "transform", transitionDuration: `${animationDuration}ms`, transitionTimingFunction: "ease-in-out" }}
         onClick={() => {

@@ -142,21 +142,8 @@ const MusicStorePortal: React.FC<MusicStorePortalProps> = ({ isOpen, onClose, cu
               </section>
             )}
 
-            {/* Full Album Section */}
-            {relatedAlbum && (
-              <section className="mb-8">
-                <h2 className="text-2xl font-bold text-white mb-4">🎼 Complete the Collection</h2>
-                <AlbumPurchaseCard
-                  album={relatedAlbum}
-                  customAmount={customAmounts[relatedAlbum.id]}
-                  onCustomAmountChange={(amount) => updateCustomAmount(relatedAlbum.id, amount)}
-                  onAddToCart={() => handleAddToCart(relatedAlbum, 'album')}
-                />
-              </section>
-            )}
-
             {/* Other Music Section */}
-            {(otherTracks.length > 0 || otherAlbums.length > 0) && (
+            {otherTracks.length > 0 && (
               <section>
                 <h2 className="text-2xl font-bold text-white mb-4">🎶 More Music</h2>
                 <div className="space-y-4 max-h-96 overflow-y-auto">
@@ -167,15 +154,6 @@ const MusicStorePortal: React.FC<MusicStorePortalProps> = ({ isOpen, onClose, cu
                       customAmount={customAmounts[track.id]}
                       onCustomAmountChange={(amount) => updateCustomAmount(track.id, amount)}
                       onAddToCart={() => handleAddToCart(track, 'track')}
-                    />
-                  ))}
-                  {otherAlbums.filter(a => !a.featured).map(album => (
-                    <AlbumPurchaseCard
-                      key={album.id}
-                      album={album}
-                      customAmount={customAmounts[album.id]}
-                      onCustomAmountChange={(amount) => updateCustomAmount(album.id, amount)}
-                      onAddToCart={() => handleAddToCart(album, 'album')}
                     />
                   ))}
                 </div>

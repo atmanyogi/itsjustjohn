@@ -12,10 +12,11 @@ export default function CloudTransition() {
   const [isMobile, setIsMobile] = useState(false);
 
   // Handle responsive design using high-performance matchMedia to avoid resize thrashing on scroll
+  // Detects both small widths (portrait mobile) and small heights (landscape mobile)
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    const mediaQuery = window.matchMedia('(max-width: 768px)');
+    const mediaQuery = window.matchMedia('(max-width: 768px) or (max-height: 500px)');
     setIsMobile(mediaQuery.matches);
 
     const handleChange = (e: MediaQueryListEvent) => {

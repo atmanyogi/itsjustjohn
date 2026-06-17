@@ -73,7 +73,7 @@ export const useAudioStore = create<AudioState>()(
 
       const newHowl = new Howl({
         src: [track.audioSrc],
-        html5: true, // true lets HTML5 stream remote files without CORS blocks!
+        html5: false, // Switch to Web Audio API to enable dynamic volume control/cross-platform gain support
         volume: get().volume,
       onplay: () => {
         set({ isPlaying: true, duration: newHowl.duration() });

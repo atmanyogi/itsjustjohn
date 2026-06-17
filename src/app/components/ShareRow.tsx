@@ -45,11 +45,6 @@ const ShareRow: React.FC<ShareRowProps> = ({ urlToShare /*, titleToShare */ }) =
         <FaFacebook size={20} />
       </button>
 
-      {/* Instagram Icon */}
-      <button title="Share on Instagram" className="p-2 rounded-full hover:bg-gray-200 text-gray-700 hover:text-pink-600 transition-colors" onClick={() => alert('Instagram sharing is not supported directly.')}>
-        <FaInstagram size={20} />
-      </button>
-
       {/* Copy Link */}
       <button 
         onClick={handleCopy}

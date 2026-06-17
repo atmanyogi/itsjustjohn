@@ -66,12 +66,12 @@ export default function Footer() {
             </h3>
             <ul className="space-y-2 text-sm text-gray-400">
               <li>
-                <Link href="/#music-section" className="hover:text-white transition-colors no-underline">
+                <Link href={isMobile ? "/music" : "/#music-section"} className="hover:text-white transition-colors no-underline">
                   Music Catalog
                 </Link>
               </li>
               <li>
-                <Link href="/#shop-section" className="hover:text-white transition-colors no-underline">
+                <Link href="/shop" className="hover:text-white transition-colors no-underline">
                   Gear & Shop
                 </Link>
               </li>
@@ -95,22 +95,22 @@ export default function Footer() {
             </h3>
             <ul className="space-y-2 text-sm text-gray-400">
               <li>
-                <Link href={isMobile ? "/#gallery-mobile" : "/#gallery-desktop"} className="hover:text-white transition-colors no-underline">
+                <Link href={isMobile ? "/gallery" : "/#gallery-desktop"} className="hover:text-white transition-colors no-underline">
                   Gallery & Media
                 </Link>
               </li>
               <li>
-                <Link href="/#video-section" className="hover:text-white transition-colors no-underline">
+                <Link href={isMobile ? "/videos" : "/#video-section"} className="hover:text-white transition-colors no-underline">
                   Video Archive
                 </Link>
               </li>
               <li>
-                <Link href="/#extras-section" className="hover:text-white transition-colors no-underline">
+                <Link href={isMobile ? "/extras" : "/#extras-section"} className="hover:text-white transition-colors no-underline">
                   Studio Extras
                 </Link>
               </li>
               <li>
-                <Link href="/#blog-section" className="hover:text-white transition-colors no-underline">
+                <Link href={isMobile ? "/blog" : "/#blog-section"} className="hover:text-white transition-colors no-underline">
                   Personal Blog
                 </Link>
               </li>
