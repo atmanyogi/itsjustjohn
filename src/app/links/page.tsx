@@ -116,13 +116,24 @@ export default function LinksPage() {
         <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(5,8,5,0.62),rgba(16,24,15,0.72)_42%,#10180f_100%)]" />
 
         <div className="mx-auto grid w-full max-w-6xl items-center gap-8 md:grid-cols-[0.9fr_1.1fr]">
-          <div className="relative mx-auto hidden w-full max-w-md md:block">
+          <div className="relative mx-auto w-full max-w-md">
+            <div className="relative overflow-hidden border border-emerald-100/20 bg-black/35 shadow-2xl shadow-black/60">
+              <Image
+                src="/johnalllinx-main.jpg"
+                alt="[[its.just.john]] performing under the Fern Drip umbrella"
+                width={1368}
+                height={2048}
+                className="aspect-[4/5] w-full object-cover object-[50%_30%]"
+                priority
+              />
+              <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(5,8,5,0.02),rgba(5,8,5,0.34)_82%)]" />
+            </div>
             <Image
               src="/jar bottom.png"
-              alt="Fern Drip terrarium jar"
+              alt=""
               width={618}
               height={768}
-              className="h-auto w-full drop-shadow-[0_28px_60px_rgba(0,0,0,0.55)]"
+              className="pointer-events-none absolute -bottom-14 left-1/2 hidden w-[82%] -translate-x-1/2 opacity-35 drop-shadow-[0_28px_60px_rgba(0,0,0,0.55)] md:block"
               priority
             />
             <Image
@@ -130,7 +141,7 @@ export default function LinksPage() {
               alt=""
               width={580}
               height={401}
-              className="absolute left-1/2 top-[18%] w-[68%] -translate-x-1/2 opacity-90 drop-shadow-[0_12px_24px_rgba(0,0,0,0.45)]"
+              className="pointer-events-none absolute -bottom-6 left-1/2 hidden w-[62%] -translate-x-1/2 opacity-80 drop-shadow-[0_12px_24px_rgba(0,0,0,0.45)] md:block"
             />
           </div>
 
