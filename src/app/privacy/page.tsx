@@ -124,10 +124,10 @@ export default function PrivacyPolicyPage() {
             {/* Section 7 */}
             <section>
               <h2 className="text-xl font-bold mb-3 text-white border-b border-white/10 pb-1">
-                7. Cookies Policy
+                7. Cookies & Analytics Policy
               </h2>
               <p>
-                Our site uses essential, non-invasive cookies solely to track state operations like maintaining your active items in the checkout cart, tracking coupon reductions, and preserving login tokens. We do not use third-party track-tracking pixels that spy on your browsing habits elsewhere on the web.
+                Our site uses essential, non-invasive cookies solely to track state operations like maintaining your active items in the checkout cart, tracking coupon reductions, and preserving session integrity. Additionally, we employ a first-party, completely self-contained browser-local analytics system that monitors visitor patterns, page views, and music metrics anonymously in your browser (not synced to third-party tracking networks or marketing databases). We do not use third-party tracking pixels that spy on your browsing habits elsewhere on the web.
               </p>
             </section>
 

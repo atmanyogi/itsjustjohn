@@ -71,16 +71,41 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       return [...prev, { ...newItem, quantity: newItem.quantity || 1 }];
     });
     
+    // Track item added to cart
+    try {
+      const { trackLocalEvent } = require("../lib/analytics");
+      trackLocalEvent("cart_item_added", {
+        productId: newItem.title || newItem.id,
+        properties: { type: newItem.type, price: newItem.price }
+      });
+    } catch (e) {}
+
     // Optional: Open cart when adding item
     // setIsCartOpen(true);
   };
 
   const removeFromCart = (id: string, options?: CartItem['options']) => {
+    // Find the item first to get its info before removing
+    const itemToRemove = cart.find(
+      (item) => item.id === id && JSON.stringify(item.options) === JSON.stringify(options)
+    );
+
     setCart((prev) =>
       prev.filter(
         (item) => !(item.id === id && JSON.stringify(item.options) === JSON.stringify(options))
       )
     );
+
+    // Track item removed from cart
+    if (itemToRemove) {
+      try {
+        const { trackLocalEvent } = require("../lib/analytics");
+        trackLocalEvent("cart_item_removed", {
+          productId: itemToRemove.title || itemToRemove.id,
+          properties: { type: itemToRemove.type, price: itemToRemove.price }
+        });
+      } catch (e) {}
+    }
   };
 
   const clearCart = () => setCart([]);

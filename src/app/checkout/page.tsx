@@ -25,7 +25,17 @@ function CheckoutForm() {
   useEffect(() => {
     const hasGear = cart.some(item => item.type === 'gear');
     setRequiresShipping(hasGear);
-  }, [cart]);
+    
+    // Track checkout started
+    if (cart.length > 0) {
+      try {
+        const { trackLocalEvent } = require("../lib/analytics");
+        trackLocalEvent("checkout_started", {
+          properties: { itemCount: cart.length, valueCents: total * 100 }
+        });
+      } catch (err) {}
+    }
+  }, [cart, total]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

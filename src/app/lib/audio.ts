@@ -77,11 +77,21 @@ export const useAudioStore = create<AudioState>()(
         volume: get().volume,
       onplay: () => {
         set({ isPlaying: true, duration: newHowl.duration() });
+        // Track music track started event
+        try {
+          const { trackLocalEvent } = require("./analytics");
+          trackLocalEvent("music_track_started", { trackId: track.title || id });
+        } catch (e) {}
       },
         onpause: () => set({ isPlaying: false }),
         onstop: () => set({ isPlaying: false, position: 0 }),
         onend: () => {
           set({ isPlaying: false, position: 0 });
+          // Track music track complete event
+          try {
+            const { trackLocalEvent } = require("./analytics");
+            trackLocalEvent("music_completed", { trackId: track.title || id });
+          } catch (e) {}
           get().next();
         },
         onloaderror: (id, err) => {

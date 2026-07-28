@@ -1,236 +1,182 @@
 import Image from "next/image";
 import type { Metadata } from "next";
-import {
-  FaEnvelope,
-  FaInstagram,
-  FaShoppingBag,
-  FaYoutube,
-} from "react-icons/fa";
-import { BsMusicNoteBeamed } from "react-icons/bs";
-import {
-  HiOutlineHeart,
-  HiOutlinePhotograph,
-  HiOutlineSparkles,
-  HiOutlineVideoCamera,
-} from "react-icons/hi";
+import { FaEnvelope, FaInstagram, FaYoutube } from "react-icons/fa";
+import { BsMusicNoteBeamed, BsGlobe } from "react-icons/bs";
 
 export const metadata: Metadata = {
-  title: "JohnAllLinx | [[its.just.john]]",
+  title: "Portals | [[its.just.john]]",
   description:
-    "The official one-link hub for [[its.just.john]] music, shop, socials, videos, support, and contact.",
+    "The official portal hub for [[its.just.john]]. Connect, listen, explore visual works, and contact directly.",
   robots: {
     index: false,
     follow: true,
   },
 };
 
-const featuredLinks = [
+const links = [
+  {
+    label: "Creative Visual Works",
+    sublabel: "@vibevisualshawaii",
+    description: "High-vibe branding, artist assets, and visual productions from Hawaii.",
+    href: "https://www.instagram.com/vibevisualshawaii/",
+    isExternal: true,
+    accent: "border-emerald-500/10 hover:border-emerald-400/40 hover:bg-emerald-950/20",
+    icon: FaInstagram,
+    glow: "rgba(52,211,153,0.3)",
+  },
   {
     label: "Listen to the Music",
-    description: "Catalog, releases, and sonic journal entries.",
+    sublabel: "Interactive Player",
+    description: "Immerse in the glass jar transmissions, releases, and full music catalog.",
     href: "/music",
+    isExternal: false,
+    accent: "border-yellow-500/10 hover:border-yellow-400/40 hover:bg-yellow-950/20",
     icon: BsMusicNoteBeamed,
+    glow: "rgba(251,191,36,0.3)",
   },
   {
-    label: "Shop Gear",
-    description: "Fern Drip apparel, drops, and artist goods.",
-    href: "/shop",
-    icon: FaShoppingBag,
+    label: "Official Website",
+    sublabel: "bruhitsjustjohn.com",
+    description: "Step into the full terrarium interface and interactive extra worlds.",
+    href: "/",
+    isExternal: false,
+    accent: "border-zinc-500/10 hover:border-zinc-400/40 hover:bg-zinc-950/20",
+    icon: BsGlobe,
+    glow: "rgba(161,161,170,0.3)",
   },
   {
-    label: "Support on Venmo",
-    description: "Send love straight to the fern fund.",
-    href: "https://account.venmo.com/u/Ferndrip-itsjustjohn",
-    icon: HiOutlineHeart,
-  },
-];
-
-const socialLinks = [
-  {
-    label: "Instagram",
+    label: "Official Music IG",
+    sublabel: "@itsjustjohntho",
+    description: "Direct music community updates and behind-the-scenes transmissions.",
     href: "https://www.instagram.com/itsjustjohntho/",
+    isExternal: true,
+    accent: "border-pink-500/10 hover:border-pink-400/40 hover:bg-pink-950/20",
     icon: FaInstagram,
+    glow: "rgba(236,72,153,0.3)",
   },
   {
-    label: "YouTube",
+    label: "YouTube Productions",
+    sublabel: "Official Videos",
+    description: "Visual narratives, video episodes, and cinematic documentation.",
     href: "https://www.youtube.com/@itsjustjohn-tho",
+    isExternal: true,
+    accent: "border-red-500/10 hover:border-red-400/40 hover:bg-red-950/20",
     icon: FaYoutube,
+    glow: "rgba(239,68,68,0.3)",
   },
   {
-    label: "Gallery",
-    href: "/gallery",
-    icon: HiOutlinePhotograph,
-  },
-  {
-    label: "Videos",
-    href: "/videos",
-    icon: HiOutlineVideoCamera,
-  },
-  {
-    label: "Studio Extras",
-    href: "/extras",
-    icon: HiOutlineSparkles,
-  },
-  {
-    label: "Email",
+    label: "Inquiries & Contact",
+    sublabel: "aloha@bruhitsjustjohn.com",
+    description: "Reach out directly for booking inquiries, client services, or direct connects.",
     href: "mailto:aloha@bruhitsjustjohn.com",
+    isExternal: true,
+    accent: "border-cyan-500/10 hover:border-cyan-400/40 hover:bg-cyan-950/20",
     icon: FaEnvelope,
+    glow: "rgba(6,182,212,0.3)",
   },
 ];
 
 export default function LinksPage() {
   return (
-    <main className="min-h-screen overflow-hidden bg-[#10180f] text-white">
-      <section className="relative isolate flex min-h-screen items-center px-5 py-8 sm:px-8">
-        <Image
-          src="/terrarium.png"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="absolute inset-0 -z-30 object-cover opacity-55"
-        />
-        <Image
-          src="/cloudleft1.png"
-          alt=""
-          width={1152}
-          height={896}
-          priority
-          className="pointer-events-none absolute -left-64 top-0 -z-20 hidden w-[48rem] opacity-55 blur-[1px] md:block"
-        />
-        <Image
-          src="/cloudright1.png"
-          alt=""
-          width={1152}
-          height={896}
-          priority
-          className="pointer-events-none absolute -right-72 top-4 -z-20 hidden w-[50rem] opacity-50 blur-[1px] md:block"
-        />
-        <Image
-          src="/moss3.png"
-          alt=""
-          width={1366}
-          height={768}
-          className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-44 w-full object-cover opacity-70 sm:h-56"
-        />
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(5,8,5,0.62),rgba(16,24,15,0.72)_42%,#10180f_100%)]" />
+    <main className="relative min-h-screen overflow-x-hidden bg-[#090d09] text-white">
+      {/* Background Graphic elements */}
+      <Image
+        src="/terrarium.png"
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className="absolute inset-0 -z-30 object-cover opacity-25 filter blur-[2px] scale-105 pointer-events-none"
+      />
+      <div className="absolute inset-0 -z-20 bg-[linear-gradient(180deg,rgba(5,8,5,0.85)_0%,rgba(9,13,9,0.92)_50%,#090d09_100%)] pointer-events-none" />
 
-        <div className="mx-auto grid w-full max-w-6xl items-center gap-8 md:grid-cols-[0.9fr_1.1fr]">
-          <div className="relative mx-auto w-full max-w-md">
-            <div className="relative overflow-hidden border border-emerald-100/20 bg-black/35 shadow-2xl shadow-black/60">
-              <Image
-                src="/johnalllinx-main.jpg"
-                alt="[[its.just.john]] performing under the Fern Drip umbrella"
-                width={1368}
-                height={2048}
-                className="aspect-[4/5] w-full object-cover object-[50%_30%]"
-                priority
-              />
-              <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(5,8,5,0.02),rgba(5,8,5,0.34)_82%)]" />
-            </div>
+      {/* Decorative cloud shapes in background for atmosphere */}
+      <div className="absolute top-[10%] left-[-20%] -z-10 w-[60%] aspect-square rounded-full bg-emerald-950/10 blur-[120px] pointer-events-none animate-pulse duration-[8s]" />
+      <div className="absolute bottom-[20%] right-[-25%] -z-10 w-[70%] aspect-square rounded-full bg-[#ffe066]/5 blur-[150px] pointer-events-none animate-pulse duration-[12s]" />
+
+      <section className="relative flex justify-center items-center py-16 px-4 md:px-8">
+        <div className="w-full max-w-lg flex flex-col items-center">
+          {/* Canopy Umbrella Header Design */}
+          <div className="relative w-36 h-36 mb-4 filter drop-shadow-[0_4px_30px_rgba(52,211,153,0.25)] hover:scale-105 active:scale-95 transition-transform duration-500">
             <Image
-              src="/jar bottom.png"
-              alt=""
-              width={618}
-              height={768}
-              className="pointer-events-none absolute -bottom-14 left-1/2 hidden w-[82%] -translate-x-1/2 opacity-35 drop-shadow-[0_28px_60px_rgba(0,0,0,0.55)] md:block"
+              src="/umbrella.png"
+              alt="Canopy Umbrella"
+              fill
+              sizes="144px"
+              className="object-contain brightness-95 saturate-110 pointer-events-none"
               priority
             />
-            <Image
-              src="/Ferndrip.png"
-              alt=""
-              width={580}
-              height={401}
-              className="pointer-events-none absolute -bottom-6 left-1/2 hidden w-[62%] -translate-x-1/2 opacity-80 drop-shadow-[0_12px_24px_rgba(0,0,0,0.45)] md:block"
-            />
           </div>
 
-          <div className="mx-auto flex w-full max-w-xl flex-col items-center md:items-start">
-            <div className="relative mb-4 h-28 w-28 overflow-hidden rounded-full border border-white/25 bg-black/35 shadow-2xl shadow-black/50 md:h-32 md:w-32">
-              <Image
-                src="/IJJ LOGO.png"
-                alt="[[its.just.john]] logo"
-                fill
-                sizes="128px"
-                className="object-contain p-2"
-                priority
-              />
-            </div>
-
-            <p className="mb-2 text-xs font-black uppercase tracking-[0.36em] text-emerald-100/85">
-              JohnAllLinx
+          {/* Subtitle / Header */}
+          <div className="text-center">
+            <p className="text-[10px] font-black uppercase tracking-[0.45em] text-[#ffe066]/90 mb-2 drop-shadow-md">
+              JohnAllLinx Portal
             </p>
-            <h1 className="text-center text-5xl font-black leading-none text-white drop-shadow-[0_5px_20px_rgba(0,0,0,0.7)] sm:text-6xl md:text-left">
+            <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white drop-shadow-[0_3px_10px_rgba(0,0,0,0.5)]">
               [[its.just.john]]
             </h1>
-            <p className="mt-4 max-w-md text-center text-sm font-semibold leading-6 text-zinc-100 drop-shadow-[0_3px_12px_rgba(0,0,0,0.8)] sm:text-base md:text-left">
-              Fern drip, glass jar transmissions, music, visuals, shop,
-              support, and direct contact from Mountain View, Hawaii.
-            </p>
+          </div>
 
-            <div className="mt-7 grid w-full gap-3">
-              {featuredLinks.map((link) => {
-                const Icon = link.icon;
-
-                return (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    target={
-                      link.href.startsWith("http") ? "_blank" : undefined
-                    }
-                    rel={
-                      link.href.startsWith("http")
-                        ? "noopener noreferrer"
-                        : undefined
-                    }
-                    className="group flex min-h-20 items-center gap-4 border border-emerald-100/20 bg-[#f5f7fa]/[0.11] px-5 py-4 text-left shadow-lg shadow-black/30 backdrop-blur-md transition duration-200 hover:-translate-y-0.5 hover:border-emerald-100/70 hover:bg-emerald-50/20"
-                  >
-                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#ffe066] text-zinc-950 transition group-hover:scale-105">
-                      <Icon className="h-5 w-5" />
-                    </span>
-                    <span className="min-w-0">
-                      <span className="block text-base font-black text-white">
-                        {link.label}
-                      </span>
-                      <span className="mt-1 block text-sm leading-5 text-zinc-200">
-                        {link.description}
-                      </span>
-                    </span>
-                  </a>
-                );
-              })}
-            </div>
-
-            <div className="mt-5 grid w-full grid-cols-2 gap-3 sm:grid-cols-3">
-              {socialLinks.map((link) => {
-                const Icon = link.icon;
-
-                return (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    target={
-                      link.href.startsWith("http") ? "_blank" : undefined
-                    }
-                    rel={
-                      link.href.startsWith("http")
-                        ? "noopener noreferrer"
-                        : undefined
-                    }
-                    className="flex min-h-16 items-center justify-center gap-2 border border-white/15 bg-black/40 px-3 py-3 text-sm font-bold text-zinc-100 backdrop-blur-sm transition hover:border-[#ffe066]/80 hover:bg-[#ffe066] hover:text-zinc-950"
-                  >
-                    <Icon className="h-4 w-4 shrink-0" />
-                    <span className="truncate">{link.label}</span>
-                  </a>
-                );
-              })}
-            </div>
-
-            <p className="mt-8 text-center text-xs uppercase tracking-[0.24em] text-zinc-300 md:text-left">
-              bruhitsjustjohn.com/links
+          {/* Dope custom written explanation bio */}
+          <div className="mt-5 text-center max-w-md">
+            <p className="text-sm sm:text-base font-semibold leading-relaxed text-zinc-200 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] px-2">
+              Transmitting raw art, glass jar sonic journals, and vivid imagery under a creative canopy from Hilo. 
+              <span className="block mt-3 text-emerald-400/95 font-bold tracking-wide">
+                Click below to discover why I am here for the public.
+              </span>
             </p>
           </div>
+
+          {/* Links Portals Stack */}
+          <div className="mt-10 w-full space-y-4">
+            {links.map((link) => {
+              const Icon = link.icon;
+
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  target={link.isExternal ? "_blank" : undefined}
+                  rel={link.isExternal ? "noopener noreferrer" : undefined}
+                  className={`group flex items-center justify-between border bg-[#f5f7fa]/[0.03] backdrop-blur-lg p-[18px] rounded-2xl shadow-xl transition-all duration-300 hover:-translate-y-1 ${link.accent}`}
+                  style={{
+                    boxShadow: "0 10px 30px -10px rgba(0, 0, 0, 0.4)",
+                  }}
+                >
+                  <div className="flex items-center gap-4 min-w-0 w-full">
+                    {/* Glowing tactile icon button */}
+                    <span 
+                      className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/5 border border-white/10 text-[#ffe066] transition-all duration-300 group-hover:bg-[#ffe066] group-hover:text-black group-hover:border-transparent"
+                      style={{
+                        WebkitBackfaceVisibility: "hidden",
+                      }}
+                    >
+                      <Icon className="h-5 w-5 pointer-events-none" />
+                    </span>
+                    <div className="min-w-0 flex-1 text-left">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="text-base font-black text-white tracking-wide group-hover:text-[#ffe066] transition-colors leading-tight truncate">
+                          {link.label}
+                        </span>
+                        <span className="text-[10px] font-black uppercase tracking-widest text-[#ffe066]/70 group-hover:text-white transition-colors shrink-0">
+                          {link.sublabel}
+                        </span>
+                      </div>
+                      <span className="mt-1.5 block text-xs leading-relaxed text-zinc-400 group-hover:text-zinc-200 transition-colors">
+                        {link.description}
+                      </span>
+                    </div>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+
+          {/* Simple custom footer */}
+          <footer className="mt-16 text-center text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-500/80">
+            © {new Date().getFullYear()} bruhitsjustjohn.com/links
+          </footer>
         </div>
       </section>
     </main>

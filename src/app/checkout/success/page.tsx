@@ -128,6 +128,19 @@ function SuccessPageContent() {
         setStatus('success');
         clearCart(); // Clear cart on success
 
+        // Track successful purchase in browser-local analytics
+        try {
+          const { trackLocalEvent } = require("../../lib/analytics");
+          trackLocalEvent("purchase_completed", {
+            orderId: paymentIntent.id,
+            valueCents: paymentIntent.amount,
+            properties: { 
+              currency: paymentIntent.currency,
+              description: paymentIntent.description
+            }
+          });
+        } catch (e) {}
+
         // Retrieve items from metadata
         // Cast to any to avoid TS errors with Stripe types that might be incomplete
         const metadata = (paymentIntent as any).metadata || {};

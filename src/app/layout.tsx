@@ -5,6 +5,8 @@ import { CartProvider } from "./context/CartContext";
 import ScrollToTopButton from "./components/ScrollToTopButton";
 import Footer from "./components/Footer";
 import { Analytics } from "@vercel/analytics/next";
+import AnalyticsTracker from "./components/AnalyticsTracker";
+import { Suspense } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,14 +34,14 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <CartProvider>
+          <Suspense fallback={null}>
+            <AnalyticsTracker />
+          </Suspense>
           {children}
           <Footer />
           <ScrollToTopButton />
           <Analytics />
         </CartProvider>
-
-
-
       </body>
     </html>
   );

@@ -56,10 +56,10 @@ export default function MarketingPage() {
     <main className="relative min-h-screen overflow-x-hidden w-full max-w-full">
       <Header />
 
-      {/* First visual in chain: IJJ 4.png */}
+      {/* First visual in chain: IJJ%204.png */}
       <div className="relative w-full">
         <Image
-          src="/audio/IJJ 4.png"
+          src="/audio/IJJ%204.png"
           alt="IJJ Banner"
           width={1920}
           height={1080}
@@ -300,7 +300,7 @@ export default function MarketingPage() {
       {/* Jar Bottom - Desktop Only */}
       <div className="relative w-full hidden md:block md:-mt-[31.25vh] z-20 md:z-60 md:mb-0">
         <Image
-          src="/jar bottom.png"
+          src="/jar%20bottom.png"
           alt="Jar Bottom"
           width={1920}
           height={1080}
@@ -327,7 +327,7 @@ export default function MarketingPage() {
           className="absolute inset-0 flex items-center justify-center pointer-events-none z-100 -translate-x-[4%] -translate-y-[12.5vh] md:-translate-y-[40vh]"
         >
           <Image
-            src="/IJJ LOGO.png"
+            src="/IJJ%20LOGO.png"
             alt="IJJ Logo"
             width={500}
             height={500}
