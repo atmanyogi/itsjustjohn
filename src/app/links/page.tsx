@@ -1,6 +1,6 @@
 import Image from "next/image";
 import type { Metadata } from "next";
-import { FaEnvelope, FaInstagram, FaYoutube } from "react-icons/fa";
+import { FaEnvelope, FaInstagram, FaYoutube, FaHeart } from "react-icons/fa";
 import { BsMusicNoteBeamed, BsGlobe } from "react-icons/bs";
 
 export const metadata: Metadata = {
@@ -15,14 +15,14 @@ export const metadata: Metadata = {
 
 const links = [
   {
-    label: "Creative Visual Works",
-    sublabel: "@vibevisualshawaii",
-    description: "High-vibe branding, artist assets, and visual productions from Hawaii.",
-    href: "https://www.instagram.com/vibevisualshawaii/",
-    isExternal: true,
-    accent: "border-emerald-500/10 hover:border-emerald-400/40 hover:bg-emerald-950/20",
-    icon: FaInstagram,
-    glow: "rgba(52,211,153,0.3)",
+    label: "Official Website",
+    sublabel: "bruhitsjustjohn.com",
+    description: "Step into the full terrarium interface and interactive extra worlds.",
+    href: "/",
+    isExternal: false,
+    accent: "border-zinc-500/10 hover:border-zinc-400/40 hover:bg-zinc-950/20",
+    icon: BsGlobe,
+    glow: "rgba(161,161,170,0.3)",
   },
   {
     label: "Listen to the Music",
@@ -33,16 +33,6 @@ const links = [
     accent: "border-yellow-500/10 hover:border-yellow-400/40 hover:bg-yellow-950/20",
     icon: BsMusicNoteBeamed,
     glow: "rgba(251,191,36,0.3)",
-  },
-  {
-    label: "Official Website",
-    sublabel: "bruhitsjustjohn.com",
-    description: "Step into the full terrarium interface and interactive extra worlds.",
-    href: "/",
-    isExternal: false,
-    accent: "border-zinc-500/10 hover:border-zinc-400/40 hover:bg-zinc-950/20",
-    icon: BsGlobe,
-    glow: "rgba(161,161,170,0.3)",
   },
   {
     label: "Official Music IG",
@@ -63,6 +53,26 @@ const links = [
     accent: "border-red-500/10 hover:border-red-400/40 hover:bg-red-950/20",
     icon: FaYoutube,
     glow: "rgba(239,68,68,0.3)",
+  },
+  {
+    label: "Creative Visual Works",
+    sublabel: "@vibevisualshawaii",
+    description: "High-vibe branding, artist assets, and visual productions from Hawaii.",
+    href: "https://www.instagram.com/vibevisualshawaii/",
+    isExternal: true,
+    accent: "border-emerald-500/10 hover:border-emerald-400/40 hover:bg-emerald-950/20",
+    icon: FaInstagram,
+    glow: "rgba(52,211,153,0.3)",
+  },
+  {
+    label: "Support Me With",
+    sublabel: "@Ferndrip-itsjustjohn",
+    description: "Send direct direct love to the fern fund, supporting independent art.",
+    href: "https://account.venmo.com/u/Ferndrip-itsjustjohn",
+    isExternal: true,
+    accent: "border-rose-500/10 hover:border-rose-400/40 hover:bg-rose-950/20",
+    icon: FaHeart,
+    glow: "rgba(244,63,94,0.3)",
   },
   {
     label: "Inquiries & Contact",
@@ -96,14 +106,14 @@ export default function LinksPage() {
 
       <section className="relative flex justify-center items-center py-16 px-4 md:px-8">
         <div className="w-full max-w-lg flex flex-col items-center">
-          {/* Canopy Umbrella Header Design */}
-          <div className="relative w-36 h-36 mb-4 filter drop-shadow-[0_4px_30px_rgba(52,211,153,0.25)] hover:scale-105 active:scale-95 transition-transform duration-500">
+          {/* Fern Drip Logo Header Design */}
+          <div className="relative w-full max-w-[280px] aspect-[6444/3745] mb-6 filter drop-shadow-[0_4px_30px_rgba(52,211,153,0.2)] hover:scale-105 active:scale-95 transition-transform duration-500">
             <Image
-              src="/umbrella.png"
-              alt="Canopy Umbrella"
+              src="/Fern%20Drip%20Logo.png"
+              alt="Fern Drip Logo"
               fill
-              sizes="144px"
-              className="object-contain brightness-95 saturate-110 pointer-events-none"
+              sizes="280px"
+              className="object-contain pointer-events-none"
               priority
             />
           </div>
@@ -121,9 +131,9 @@ export default function LinksPage() {
           {/* Dope custom written explanation bio */}
           <div className="mt-5 text-center max-w-md">
             <p className="text-sm sm:text-base font-semibold leading-relaxed text-zinc-200 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] px-2">
-              Transmitting raw art, glass jar sonic journals, and vivid imagery under a creative canopy from Hilo. 
-              <span className="block mt-3 text-emerald-400/95 font-bold tracking-wide">
-                Click below to discover why I am here for the public.
+              Transmitting raw art, translating artists stories through sound and vivid imagery under a creative canopy built and lived through Hilo Hawaii on the Big Island.
+              <span className="block mt-4 text-emerald-400 font-bold tracking-wide">
+                Click below to discover
               </span>
             </p>
           </div>
@@ -147,7 +157,7 @@ export default function LinksPage() {
                   <div className="flex items-center gap-4 min-w-0 w-full">
                     {/* Glowing tactile icon button */}
                     <span 
-                      className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/5 border border-white/10 text-[#ffe066] transition-all duration-300 group-hover:bg-[#ffe066] group-hover:text-black group-hover:border-transparent"
+                      className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/5 border border-white/10 text-[#ffe066] transition-all duration-300 group-hover:bg-[#ffe066] group-hover:text-black group-hover:border-transparent animate-button-glow"
                       style={{
                         WebkitBackfaceVisibility: "hidden",
                       }}
