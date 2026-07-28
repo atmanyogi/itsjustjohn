@@ -65,9 +65,9 @@ const links = [
     glow: "rgba(52,211,153,0.3)",
   },
   {
-    label: "Support Me With",
+    label: "Support me through Venmo",
     sublabel: "@Ferndrip-itsjustjohn",
-    description: "Send direct direct love to the fern fund, supporting independent art.",
+    description: "Send direct love to the fern fund, supporting independent art.",
     href: "https://account.venmo.com/u/Ferndrip-itsjustjohn",
     isExternal: true,
     accent: "border-rose-500/10 hover:border-rose-400/40 hover:bg-rose-950/20",
