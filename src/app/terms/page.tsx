@@ -67,7 +67,7 @@ export default function TermsOfServicePage() {
                   <strong className="text-gray-200">Personal License:</strong> Grant of a non-exclusive, non-transferable license to use sound assets for personal enjoyment and recreation. You may not use these sounds for commercial placements, monetization on Spotify/Apple Music, film synchronization, or local advertising campaigns.
                 </li>
                 <li>
-                  <strong className="text-gray-200">Commercial Synchronizations:</strong> For commercial licenses, synchronization rights, custom placements, or royalty splits, contact us directly at <a href="mailto:aloha@bruhitsjustjohn.com" className="text-white underline hover:text-gray-200 transition-colors">aloha@bruhitsjustjohn.com</a>.
+                  <strong className="text-gray-200">Commercial Synchronizations:</strong> For commercial licenses, synchronization rights, custom placements, or royalty splits, contact us directly at <a href="mailto:aloha@ferndripcreativestudios.com" className="text-white underline hover:text-gray-200 transition-colors">aloha@ferndripcreativestudios.com</a>.
                 </li>
                 <li>
                   <strong className="text-gray-200">Anti-Piracy:</strong> You may not dissect, recreate, repackage, or distribute loops or stems as your own audio stock packs, sound effects libraries, or public construction collections.
@@ -123,7 +123,7 @@ export default function TermsOfServicePage() {
               </p>
               <p className="mt-3 font-semibold text-white">
                 Fern Drip Creative Studio LLC<br />
-                Email: <a href="mailto:aloha@bruhitsjustjohn.com" className="underline hover:text-gray-200 transition-colors">aloha@bruhitsjustjohn.com</a>
+                Email: <a href="mailto:aloha@ferndripcreativestudios.com" className="underline hover:text-gray-200 transition-colors">aloha@ferndripcreativestudios.com</a>
               </p>
             </section>
           </div>

@@ -159,10 +159,10 @@ export default function Footer() {
             <p>
               Direct contact, business inquiries, and digital audio licensing:{" "}
               <a 
-                href="mailto:aloha@bruhitsjustjohn.com" 
+                href="mailto:aloha@ferndripcreativestudios.com" 
                 className="text-emerald-400 hover:text-emerald-300 transition-colors no-underline font-medium"
               >
-                aloha@bruhitsjustjohn.com
+                aloha@ferndripcreativestudios.com
               </a>
             </p>
           </div>

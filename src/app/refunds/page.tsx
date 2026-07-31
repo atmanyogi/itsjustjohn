@@ -44,7 +44,7 @@ export default function RefundPolicyPage() {
                 Once a transaction is finalized and the unique secure download path URL has been delivered or clicked, the sale is permanent. This protection exists to safeguard the creative musical property of Fern Drip Creative Studio LLC from digital piracy.
               </p>
               <p className="text-gray-400 text-sm">
-                *If you experience any technical download disruptions, browser link corruptions, or fail to receive your secure file delivery coordinates, please email us at <a href="mailto:aloha@bruhitsjustjohn.com" className="text-white underline font-medium">aloha@bruhitsjustjohn.com</a> with your order number. We will manually refresh your download limits or deliver alternative secure directories within 24 hours.
+                *If you experience any technical download disruptions, browser link corruptions, or fail to receive your secure file delivery coordinates, please email us at <a href="mailto:aloha@ferndripcreativestudios.com" className="text-white underline font-medium">aloha@ferndripcreativestudios.com</a> with your order number. We will manually refresh your download limits or deliver alternative secure directories within 24 hours.
               </p>
             </section>
 
@@ -75,7 +75,7 @@ export default function RefundPolicyPage() {
                 3. Damaged or Defective Items upon Arrival
               </h2>
               <p>
-                If your physical merch arrives with visible printing defects, fabric rips, seam separation, or was physically damaged during transit, <span className="text-green-400 font-medium">we will resolve it 100% free of charge</span>. Please notify us at <a href="mailto:aloha@bruhitsjustjohn.com" className="text-white underline">aloha@bruhitsjustjohn.com</a> within 10 days of package receipt. Include your full transaction ID, clear photographs showing the printing/stitching anomalies, and a brief description. Once verified, we will dispatch a brand-new identical item or issue a full payout refund immediately, including shipping charges.
+                If your physical merch arrives with visible printing defects, fabric rips, seam separation, or was physically damaged during transit, <span className="text-green-400 font-medium">we will resolve it 100% free of charge</span>. Please notify us at <a href="mailto:aloha@ferndripcreativestudios.com" className="text-white underline">aloha@ferndripcreativestudios.com</a> within 10 days of package receipt. Include your full transaction ID, clear photographs showing the printing/stitching anomalies, and a brief description. Once verified, we will dispatch a brand-new identical item or issue a full payout refund immediately, including shipping charges.
               </p>
             </section>
 
@@ -97,7 +97,7 @@ export default function RefundPolicyPage() {
               </p>
               <p className="mt-3 font-semibold text-white">
                 Fern Drip Creative Studio LLC<br />
-                Email: <a href="mailto:aloha@bruhitsjustjohn.com" className="underline hover:text-gray-200 transition-colors">aloha@bruhitsjustjohn.com</a>
+                Email: <a href="mailto:aloha@ferndripcreativestudios.com" className="underline hover:text-gray-200 transition-colors">aloha@ferndripcreativestudios.com</a>
               </p>
             </section>
           </div>

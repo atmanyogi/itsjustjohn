@@ -76,9 +76,9 @@ const links = [
   },
   {
     label: "Inquiries & Contact",
-    sublabel: "aloha@bruhitsjustjohn.com",
+    sublabel: "aloha@ferndripcreativestudios.com",
     description: "Reach out directly for booking inquiries, client services, or direct connects.",
-    href: "mailto:aloha@bruhitsjustjohn.com",
+    href: "mailto:aloha@ferndripcreativestudios.com",
     isExternal: true,
     accent: "border-cyan-500/10 hover:border-cyan-400/40 hover:bg-cyan-950/20",
     icon: FaEnvelope,

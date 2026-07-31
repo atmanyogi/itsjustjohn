@@ -406,10 +406,10 @@ export default function MarketingPage() {
                   <br />
                   contact{" "}
                   <a 
-                    href="mailto:visuals@bruhitsjustjohn.com" 
+                    href="mailto:aloha@ferndripcreativestudios.com" 
                     className="underline text-shadow-sm hover:text-accent font-semibold transition-colors duration-200"
                   >
-                    visuals@bruhitsjustjohn.com
+                    aloha@ferndripcreativestudios.com
                   </a>
                 </span>
               } 

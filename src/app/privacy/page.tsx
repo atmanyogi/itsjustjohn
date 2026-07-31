@@ -69,7 +69,7 @@ export default function PrivacyPolicyPage() {
               <ul className="list-disc list-inside space-y-2 text-gray-400 pl-2">
                 <li>To ship physical apparel orders and coordinate accurate delivery tracking.</li>
                 <li>To generate and email instant, unique secure download paths for digital sound, stems, or track files.</li>
-                <li>To provide dedicated technical assistance when resolving checkout issues or billing anomalies via <a href="mailto:aloha@bruhitsjustjohn.com" className="text-white underline">aloha@bruhitsjustjohn.com</a>.</li>
+                <li>To provide dedicated technical assistance when resolving checkout issues or billing anomalies via <a href="mailto:aloha@ferndripcreativestudios.com" className="text-white underline">aloha@ferndripcreativestudios.com</a>.</li>
                 <li>To maintain legal and financial audits, tax obligations, and protect our services against bot activity or transaction fraud.</li>
               </ul>
             </section>
@@ -117,7 +117,7 @@ export default function PrivacyPolicyPage() {
                 <li>Receive a transparent copy of the database records we hold under your email.</li>
                 <li>Request that we rectify typographical spelling mistakes on your shipping coords or email profiles.</li>
                 <li>Request that we <span className="text-red-400 font-medium">permanently erase your billing/email details</span> from our contact logs (excluding general tax transaction ledger logs we are forced to keep by tax regulations).</li>
-                <li>Opt-out of any system emails or order notifications by filing an express request to <a href="mailto:aloha@bruhitsjustjohn.com" className="text-white underline">aloha@bruhitsjustjohn.com</a>.</li>
+                <li>Opt-out of any system emails or order notifications by filing an express request to <a href="mailto:aloha@ferndripcreativestudios.com" className="text-white underline">aloha@ferndripcreativestudios.com</a>.</li>
               </ul>
             </section>
 
@@ -139,7 +139,7 @@ export default function PrivacyPolicyPage() {
               </p>
               <p className="mt-3 font-semibold text-white">
                 Fern Drip Creative Studio LLC<br />
-                Email: <a href="mailto:aloha@bruhitsjustjohn.com" className="underline hover:text-gray-200 transition-colors">aloha@bruhitsjustjohn.com</a>
+                Email: <a href="mailto:aloha@ferndripcreativestudios.com" className="underline hover:text-gray-200 transition-colors">aloha@ferndripcreativestudios.com</a>
               </p>
             </section>
           </div>

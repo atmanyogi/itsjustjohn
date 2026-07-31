@@ -44,7 +44,7 @@ export default function ShippingPolicyPage() {
                 A unique, secure download path will compile on your browser window layout immediately at checkout, and an identical links backup set will dispatch direct to the email address coordinate provided by you during the payment processing steps.
               </p>
               <p className="text-gray-400 text-sm">
-                *Stripe validation checks can sometimes cause 1–3 minute network buffers. If you have not received your digital download path coordinates after 15 minutes, please double-check your email junk directory or coordinate with our technicians at <a href="mailto:aloha@bruhitsjustjohn.com" className="text-white underline">aloha@bruhitsjustjohn.com</a> for live support.
+                *Stripe validation checks can sometimes cause 1–3 minute network buffers. If you have not received your digital download path coordinates after 15 minutes, please double-check your email junk directory or coordinate with our technicians at <a href="mailto:aloha@ferndripcreativestudios.com" className="text-white underline">aloha@ferndripcreativestudios.com</a> for live support.
               </p>
             </section>
 
@@ -116,7 +116,7 @@ export default function ShippingPolicyPage() {
               </p>
               <p className="mt-3 font-semibold text-white">
                 Fern Drip Creative Studio LLC<br />
-                Email: <a href="mailto:aloha@bruhitsjustjohn.com" className="underline hover:text-gray-200 transition-colors">aloha@bruhitsjustjohn.com</a>
+                Email: <a href="mailto:aloha@ferndripcreativestudios.com" className="underline hover:text-gray-200 transition-colors">aloha@ferndripcreativestudios.com</a>
               </p>
             </section>
           </div>
